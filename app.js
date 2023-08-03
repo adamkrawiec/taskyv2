@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
+const db = require("./db");
 
 const PORT = 3000;
 const app = express();
@@ -19,6 +20,13 @@ app.get("/", (req, res) => {
     message: "Hello there"
   })
 })
+
+db.sequelize
+  .sync()
+  .then(() => console.log("Synced db.") )
+  .catch((err) => {
+    console.log("Failed to sync db: " + err.message);
+  });
 
 app.listen(PORT, () => {
   console.log(`[server]: Server is running on a port ${PORT}`)
