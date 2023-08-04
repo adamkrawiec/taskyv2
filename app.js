@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
-// const db = require("./db");
+const db = require("./db");
 
 const homeController = require("./home.controller");
 const PORT = 3000;
@@ -11,10 +11,10 @@ const corsOptions = {
   origin: "http://localhost:3000"
 };
 
-// db.sequelize
-//   .sync()
-//   .then(() => console.log("Synced db.") )
-//   .catch((err) => console.log("Failed to sync db: " + err.message));
+db.sequelize
+  .sync()
+  .then(() => console.log("Synced db.") )
+  .catch((err) => console.log("Failed to sync db: " + err.message));
 
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
