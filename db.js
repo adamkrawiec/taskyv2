@@ -2,6 +2,7 @@ const { Sequelize, DataTypes } = require("sequelize");
 const dbConfig = require("./config/db.config");
 const { Client } = require("pg");
 
+console.log(dbConfig)
 async function ensureDB() {
   const client = new Client({
     user: dbConfig.USER,
