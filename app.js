@@ -11,10 +11,6 @@ const corsOptions = {
   origin: "http://localhost:3000"
 };
 
-db.sequelize
-  .sync()
-  .then(() => console.log("Synced db.") )
-  .catch((err) => console.log("Failed to sync db: " + err.message));
 
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
@@ -23,6 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/", homeController);
 
-app.listen(PORT, () => {
-  console.log(`[server]: Server is running on a port ${PORT}`)
-})
+db.sequelize
+  .sync()
+  .then(() => {
+    console.log("Synced db.")
+    app.listen(PORT, () => {
+      console.log(`[server]: Server is running on a port ${PORT}`)
+    })
+  })
+  .catch((err) => console.log("Failed to sync db: " + err.message));
