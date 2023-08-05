@@ -5,7 +5,7 @@ const { Client } = require("pg");
 async function ensureDB() {
   const client = new Client({
     user: dbConfig.USER,
-    password: dbConfig.DB_PASSWORD,
+    password: dbConfig.PASSWORD,
     host: dbConfig.HOST,
   });
 
