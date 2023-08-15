@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
 const db = require("./db");
+const userRouter = require("./users/user.router");
 
 const homeController = require("./home.controller");
 const PORT = 3000;
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/", homeController);
+app.use("/users", userRouter);
 
 db.sequelize
   .sync()
