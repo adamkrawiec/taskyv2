@@ -7,8 +7,12 @@ const create = async (req, res) => {
     email: req.body.email
   }
 
-  const user = await User.create(userParams);
-  res.json(userDTO(user));
+  try {
+    const user = await User.create(userParams);
+    res.json(userDTO(user));
+  } catch({ errors }) {
+    res.status(422).json({ errors })
+  }
 }
 
 const findAll = (req, res) => {
@@ -20,7 +24,10 @@ const findAll = (req, res) => {
 
 const findOne = async (req, res) => {
   const user = await User.findByPk(req.params.id);
-  res.json(userDTO(user))
+
+  if(user) return res.json(userDTO(user))
+
+  res.status(404).send("not found");
 }
 
 const updateOne = async (req, res) => {
@@ -29,14 +36,21 @@ const updateOne = async (req, res) => {
     email: req.body.email
   }
   const user = await User.findByPk(req.params.id);
-  user.update(userParams);
-  res.json(userDTO(user));
+
+  if (!user) return res.status(404).send("not found");
+
+  try {
+    await user.update(userParams);
+    res.json(userDTO(user));
+  } catch({ errors }) {
+    res.status(422).json({ errors })
+  }
 }
 
 const destroyOne = async (req, res) => {
   const user = await User.findByPk(req.params.id);
   await user.destroy();
-  res.status(204);
+  res.status(204).send("ok");
 }
 
 module.exports = {
