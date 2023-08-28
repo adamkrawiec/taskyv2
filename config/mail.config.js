@@ -9,13 +9,8 @@ const transporter = nodemailer.createTransport(
 );
 
 let mailOptions = {
-    from: 'test@example',
-    to: "foo@example.com",
-    subject: "Hello World",
-    text: "Hello world?",
-    html: "<b>Hello world?</b>",
+    from: 'no-reply@tasky.com',
 };
-
 
 module.exports = {
   mailOptions,
