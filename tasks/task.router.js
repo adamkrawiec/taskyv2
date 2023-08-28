@@ -1,7 +1,7 @@
 const Task = require("./task.model");
 const User = require("../users/user.model");
 const express = require("express");
-
+const { mailOptions, transporter } = require("../config/mail.config")
 const taskDTO = require("./task.dto");
 
 const router = express.Router();
@@ -15,6 +15,7 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   const deadlineAt = req.body.deadline && new Date(req.body.deadline);
+  const user = await User.findByPk(req.body.user_id);
 
   const taskParams = {
     userId: req.body.user_id,
@@ -25,6 +26,12 @@ router.post("/", async (req, res) => {
 
   try {
     const task = await Task.create(taskParams);
+    mailOptions.to = user.email;
+    mailOptions.subject = "New Task"
+    mailOptions.text = "New Task assigned"
+    mailOptions.html =  "<p>New Task assigned</p>"
+    debugger;
+    await transporter.sendMail(mailOptions);
     res.json(task);
   } catch({ errors }) {
     res.status(422).json({ errors })
