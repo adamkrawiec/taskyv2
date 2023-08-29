@@ -13,6 +13,13 @@ router.get("/", async (req, res) => {
   res.json({ data: tasks });
 });
 
+router.get("/:id", async (req, res) => {
+  const task = await Task.findByPk(req.params.id);
+  const taskdto = taskDTO(task);
+
+  res.json({ data: task });
+});
+
 router.post("/", tasksController.create)
 
 router.get("/user/:userId", async (req, res) => {

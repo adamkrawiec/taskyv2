@@ -1,11 +1,18 @@
-const { mailOptions, transporter } = require("../config/mail.config")
-
+const { transporter } = require("../config/mail.config")
 
 const emailCreated = async (task, user) => {
-  mailOptions.to = user.email;
-  mailOptions.subject = "New Task"
-  mailOptions.text = "New Task assigned"
-  mailOptions.html =  "<p>New Task assigned</p>"
+  const mailOptions = {
+      from: '"Tasky" <no-reply@example.com>',
+      to: user.email,
+      subject: 'New Task assined',
+      template: 'tasks/new_task',
+      context: {
+          userName: user.name,
+          taskTitle: task.title,
+          taskDeadline: task.deadline,
+          taskId: task.id
+      }
+  };
   await transporter.sendMail(mailOptions);
 };
 

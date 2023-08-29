@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>New Task Assigned</title>
+  </head>
+  <body>
+    <h2>Task Assigned: {{ taskTitle }} </h2>
+    <p>
+      You were assigned a new task: <b>{{ taskTitle }}</b>
+      to be completed by <b>{{ taskDeadline }}</b>
+      <a href="localhost/tasks/{{taskId}}">Show task</a>
+    </p>
+  </body>
+</html>
