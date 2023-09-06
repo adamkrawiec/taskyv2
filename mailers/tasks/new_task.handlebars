@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>New Task Assigned</title>
+    <title>{{ t('mailers.tasks.new_task.title') }}</title>
   </head>
   <body>
-    <h2>Task Assigned: {{ taskTitle }} </h2>
+    <h2>{{ t('mailers.tasks.new_task.header') }}: {{ taskTitle }} </h2>
     <p>
       You were assigned a new task: <b>{{ taskTitle }}</b>
       to be completed by <b>{{ taskDeadline }}</b>

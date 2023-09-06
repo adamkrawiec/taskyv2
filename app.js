@@ -1,12 +1,18 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require("cors");
+const logger = require("morgan");
+const path = require("path");
+
 const db = require("./db");
+const { i18nextMiddleware } = require("./config/locales.config");
 const userRouter = require("./users/user.router");
 const taskRouter = require("./tasks/task.router");
 
 const homeController = require("./home.controller");
+
 const PORT = 3000;
+
 const app = express();
 
 const corsOptions = {
@@ -14,6 +20,8 @@ const corsOptions = {
 };
 
 
+app.use(i18nextMiddleware);
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use(express.json());

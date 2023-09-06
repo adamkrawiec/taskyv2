@@ -16,3 +16,5 @@
 - [ ] setup redis
 - [ ] nodemailer to work with bull.js - send emails in queues
 - [ ] introduce docker compose
+- [ ] internationalization
+- [ ] move to mailtrap

@@ -1,0 +1,15 @@
+{
+  "mailers": {
+    "tasks": {
+      "new_task": {
+        "title": "New Task Assigned",
+        "header": "Task Assigned"
+      }
+    }
+  },
+  "tasks": {
+    "index": {
+      "title": "Tasks log"
+    }
+  }
+}

@@ -21,11 +21,11 @@ const handlebarOptions = {
 
 transporter.use('compile', hbs(handlebarOptions));
 
-let mailOptions = {
-    from: 'no-reply@tasky.com',
+let mailDefaults = {
+    from: '"Tasky" <no-reply@example.com>',
 };
 
 module.exports = {
-  mailOptions,
+  mailDefaults,
   transporter,
 }

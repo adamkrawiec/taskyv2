@@ -10,7 +10,8 @@ router.get("/", async (req, res) => {
   let tasks = await Task.findAll( { include: User });
   tasks = tasks.map((task) => taskDTO(task));
 
-  res.json({ data: tasks });
+  const title = req.t('tasks.index.title')
+  res.json({ title, data: tasks });
 });
 
 router.get("/:id", async (req, res) => {

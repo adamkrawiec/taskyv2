@@ -1,10 +1,10 @@
-const { transporter } = require("../config/mail.config")
+const { mailDefaults, transporter } = require("../config/mail.config")
 
 const emailCreated = async (task, user) => {
   const mailOptions = {
-      from: '"Tasky" <no-reply@example.com>',
+      from: mailDefaults.from,
       to: user.email,
-      subject: 'New Task assined',
+      subject: texts.mailers.tasks.new_task.title,
       template: 'tasks/new_task',
       context: {
           userName: user.name,
