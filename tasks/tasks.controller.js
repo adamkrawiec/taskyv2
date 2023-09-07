@@ -15,10 +15,9 @@ const create = async (req, res) => {
 
   try {
     const task = await Task.create(taskParams);
-
-    await TaskMailer.emailCreated(task, user);
+    await TaskMailer.emailCreated(task, user, req.t);
     res.json(task);
-  } catch({ errors }) {
+  } catch(errors) {
     res.status(422).json({ errors })
   }
 };

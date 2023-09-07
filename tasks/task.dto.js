@@ -6,9 +6,10 @@ const taskDTO = (task) => {
     title: task.title,
     deadline: task.deadline,
     status: task.status,
+    createdAt: task.createdAt,
     completedAt: task.completedAt,
 
-    user: userDTO(task.user),
+    user: task.user && userDTO(task.user),
 
     _links: {
       self: `/tasks/${task.id}`,
