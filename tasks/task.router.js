@@ -6,9 +6,14 @@ const router = express.Router();
 
 router.get("/", tasksController.index);
 router.get("/my", tasksController.myTasks);
+router.get("/summary", tasksController.summary);
 router.get("/:id", tasksController.showById);
 router.get("/user/:userId", tasksController.showByUserId);
 
 router.post("/", tasksController.create);
+
+router.put("/:id", tasksController.update);
+
+router.patch("/:id/complete", tasksController.complete);
 
 module.exports = router;
