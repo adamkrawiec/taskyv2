@@ -68,6 +68,10 @@ const update = async(req, res) => {
 
 }
 
+const destroy = async(req, res) => {
+
+}
+
 const summary = async(req, res) => {
   const total = await Task.count();
   const completed = await Task.count({ where: { completedAt: { [Op.not]: null } } });

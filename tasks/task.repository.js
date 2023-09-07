@@ -16,6 +16,8 @@ const User = require("../users/user.model");
 //   await Task.findAll({ where: { title: { [Op.substring]: title } } });
 //
 
+const findTask = async(id) => await Task.findByPk(id);
+
 const findTasks = async (req) => {
   let conditions = {}
 
@@ -24,6 +26,6 @@ const findTasks = async (req) => {
   if(req.query.user_id) conditions['userId'] = req.query.user_id
 
   return await Task.findAll({ where: conditions })
-}
+};
 
-module.exports = { findTasks };
+module.exports = { findTask, findTasks };
