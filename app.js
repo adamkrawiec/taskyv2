@@ -3,9 +3,11 @@ const bodyParser = require('body-parser');
 const cors = require("cors");
 const logger = require("morgan");
 const path = require("path");
+var cookieParser = require('cookie-parser')
 
 const db = require("./db");
 const { i18nextMiddleware } = require("./config/locales.config");
+const { getCurrentUser } = require("./middlewares/currentUser");
 const userRouter = require("./users/user.router");
 const taskRouter = require("./tasks/task.router");
 
@@ -19,13 +21,15 @@ const corsOptions = {
   origin: "http://localhost:3000"
 };
 
-
 app.use(i18nextMiddleware);
 app.use(logger('dev'));
+app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(getCurrentUser);
 
 app.use("/", homeController);
 app.use("/users", userRouter);

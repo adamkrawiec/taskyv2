@@ -1,5 +1,6 @@
 const Task = require("./task.model");
 const User = require("../users/user.model");
+const taskDTO = require("./task.dto");
 const TaskMailer = require("./task.mailer");
 
 const index = async (req, res) => {
@@ -18,6 +19,7 @@ const showById = async (req, res) => {
 };
 
 const showByUserId = async (req, res) => {
+  console.log("currentUser: ", req.currentUser)
   const user = await User.findByPk(req.params.userId);
 
   let tasks = await user.getTasks({ include: User });
@@ -27,7 +29,6 @@ const showByUserId = async (req, res) => {
 };
 
 const create = async (req, res) => {
-  const deadlineAt = req.body.deadline && new Date(req.body.deadline);
   const user = await User.findByPk(req.body.user_id);
 
   const taskParams = {
@@ -50,4 +51,5 @@ module.exports = {
   create,
   index,
   showById,
+  showByUserId,
 }
