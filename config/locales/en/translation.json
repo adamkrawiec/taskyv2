@@ -11,6 +11,12 @@
   "tasks": {
     "index": {
       "title": "Tasks log"
+    },
+    "user": {
+      "title": "{{ userName }}'s tasks'"
+    },
+    "my": {
+      "title": "My tasks"
     }
   }
 }

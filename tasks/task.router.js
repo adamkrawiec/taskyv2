@@ -5,6 +5,7 @@ const tasksController = require("./tasks.controller");
 const router = express.Router();
 
 router.get("/", tasksController.index);
+router.get("/my", tasksController.myTasks);
 router.get("/:id", tasksController.showById);
 router.get("/user/:userId", tasksController.showByUserId);
 

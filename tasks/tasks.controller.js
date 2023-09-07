@@ -19,14 +19,22 @@ const showById = async (req, res) => {
 };
 
 const showByUserId = async (req, res) => {
-  console.log("currentUser: ", req.currentUser)
   const user = await User.findByPk(req.params.userId);
 
   let tasks = await user.getTasks({ include: User });
   tasks = tasks.map((task) => taskDTO(task));
+  const title = req.t('tasks.user.title', { userName: user.fullName });
 
-  res.json({ data: tasks });
+  res.json({ title, data: tasks });
 };
+
+const myTasks = async(req, res) => {
+  let tasks = await req.currentUser.getTasks({ include: User });
+  tasks = tasks.map((task) => taskDTO(task));
+  const title = req.t('tasks.my.title');
+
+  res.json({ title, data: tasks });
+}
 
 const create = async (req, res) => {
   const user = await User.findByPk(req.body.user_id);
@@ -52,4 +60,5 @@ module.exports = {
   index,
   showById,
   showByUserId,
+  myTasks,
 }
