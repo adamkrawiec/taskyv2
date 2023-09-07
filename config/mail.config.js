@@ -18,7 +18,7 @@ const handlebarOptions = {
     defaultLayout: false,
     helpers: {
       t: i18next.t,
-      tWithOpts: (text, options) => i18next.t(text, options.hash)
+      tWithArgs: (text, args) => i18next.t(text, args.hash)
     }
   },
   viewPath: path.resolve('./mailers/'),
