@@ -15,5 +15,6 @@ i18next.use(Backend).init({
 })
 
 module.exports = {
-  i18nextMiddleware: i18nextMiddleware.handle(i18next)
+  i18nextMiddleware: i18nextMiddleware.handle(i18next),
+  i18next: i18next
 }

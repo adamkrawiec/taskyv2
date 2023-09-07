@@ -1,6 +1,7 @@
 const nodemailer = require("nodemailer");
 const hbs = require('nodemailer-express-handlebars');
 const path = require('path')
+const { i18next } = require("./locales.config");
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
@@ -15,17 +16,22 @@ const handlebarOptions = {
   viewEngine: {
     partialsDir: path.resolve('./mailers/'),
     defaultLayout: false,
+    helpers: {
+      t: i18next.t,
+      tWithOpts: (text, options) => i18next.t(text, options.hash)
+    }
   },
   viewPath: path.resolve('./mailers/'),
 };
 
 transporter.use('compile', hbs(handlebarOptions));
 
-let mailDefaults = {
+const mailDefaultOptions = {
     from: '"Tasky" <no-reply@example.com>',
+    i18next,
 };
 
 module.exports = {
-  mailDefaults,
-  transporter,
+  mailDefaultOptions,
+  transporter
 }

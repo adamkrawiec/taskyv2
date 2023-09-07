@@ -3,10 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>hi</title>
+    <title>{{ t "mailers.tasks.new_task.title" }}</title>
   </head>
   <body>
-    <h2>Welcome</h2>
+    <h2>{{ t "mailers.tasks.new_task.header" }}</h2>
+    <p>
+      {{ tWithOpts "mailers.tasks.new_task.task_assigned" title=taskTitle deadline=taskDeadline }}
+    </p>
     <p>
       <a href="localhost/tasks/{{taskId}}">Show task</a>
     </p>

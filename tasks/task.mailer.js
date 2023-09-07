@@ -1,16 +1,19 @@
-const { mailDefaults, transporter } = require("../config/mail.config")
+const { mailDefaultOptions, transporter } = require("../config/mail.config")
 
-const emailCreated = async (task, user, t) => {
+const emailCreated = async (task, user) => {
   const mailOptions = {
-      from: mailDefaults.from,
+      from: mailDefaultOptions.from,
       to: user.email,
-      subject: t("mailers.tasks.new_task.title"),
+      subject: mailDefaultOptions.i18next.t("mailers.tasks.new_task.title"),
       template: 'tasks/new_task',
       context: {
           userName: user.name,
           taskId: task.id,
+          taskTitle: task.title,
+          taskDeadline: task.deadline
       }
   };
+
   await transporter.sendMail(mailOptions);
 };
 
