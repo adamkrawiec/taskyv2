@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser')
 
 const db = require("./db");
 const { i18nextMiddleware } = require("./config/locales.config");
-const { getCurrentUser } = require("./middlewares/currentUser");
+const { setCurrentUser } = require("./middlewares/currentUser");
 const userRouter = require("./users/user.router");
 const taskRouter = require("./tasks/task.router");
 
@@ -29,7 +29,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(getCurrentUser);
+app.use(setCurrentUser);
 
 app.use("/", homeController);
 app.use("/users", userRouter);
