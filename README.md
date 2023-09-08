@@ -27,3 +27,4 @@
 - [ ] Activity model
 - [ ] Item model
 - [ ] missing task CRUD interface
+- [ ] add links to task DTO

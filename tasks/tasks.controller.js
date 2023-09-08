@@ -69,18 +69,16 @@ const update = async(req, res) => {
 }
 
 const destroy = async(req, res) => {
-
+  const task = await Task.findByPk(req.params.id);
+  await user.destroy();
+  res.status(204).send("ok");
 }
 
 const summary = async(req, res) => {
   const total = await Task.count();
-  const completed = await Task.count({ where: { completedAt: { [Op.not]: null } } });
-  const overdue = await Task.count({
-    where: {
-      completedAt: { [Op.is]: null },
-      deadlineAt: { [Op.lt]: Date.now() }
-    }
-  });
+  const completed = await Task.scope('completed').count();
+  const overdue = await Task.scope('overdue').count()
+
   res.json({ total, completed, overdue });
 }
 
@@ -92,5 +90,7 @@ module.exports = {
   myTasks,
   complete,
   update,
-  summary
+  summary,
+  update,
+  destroy
 }

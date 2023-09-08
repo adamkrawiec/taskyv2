@@ -16,4 +16,6 @@ router.put("/:id", tasksController.update);
 
 router.patch("/:id/complete", tasksController.complete);
 
+router.delete("/:id", tasksController.destroy);
+
 module.exports = router;

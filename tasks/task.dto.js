@@ -4,16 +4,19 @@ const taskDTO = (task) => {
   return {
     id: task.id,
     title: task.title,
-    deadline: task.deadline,
     status: task.status,
     createdAt: task.createdAt,
     completedAt: task.completedAt,
+    deadlineAt: task.deadlineAt,
 
     user: task.user && userDTO(task.user),
 
     _links: {
       self: `/tasks/${task.id}`,
-      userTasks: `/tasks/user/${task.userId}`
+      userTasks: `/tasks/user/${task.userId}`,
+      complete: `/tasks/${task.id}/complete`,
+      update: `/tasks/${task.id}`,
+      destroy: `/tasks/${task.id}`
     }
   }
 }
