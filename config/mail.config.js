@@ -7,6 +7,7 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 
 const transporter = nodemailer.createTransport(
   {
+    host: '0.0.0.0',
     port: 1025
   }
 );
