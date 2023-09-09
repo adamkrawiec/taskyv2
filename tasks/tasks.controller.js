@@ -50,14 +50,13 @@ const create = async (req, res) => {
     deadlineAt: req.body.deadline,
   }
 
-  // try {
+  try {
     const task = await Task.create(taskParams);
-    await TaskMailer.emailCreated(task, user);
-    // await TaskMailerQueue.add({ task, user })
+    await TaskMailerQueue.add({ task, user })
     res.json(task);
-  // } catch(errors) {
-    // res.status(422).json({ errors })
-  // }
+  } catch(errors) {
+    res.status(422).json({ errors })
+  }
 };
 
 const complete = async(req, res) => {
