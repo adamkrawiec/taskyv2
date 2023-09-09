@@ -9,6 +9,10 @@ const transporter = nodemailer.createTransport(
   {
     host: '0.0.0.0',
     port: 1025
+    secure: false,
+    tls: {
+      rejectUnauthorized: false
+    }
   }
 );
 

@@ -13,7 +13,6 @@ const emailCreated = async (task, user) => {
           taskDeadline: task.deadline
       }
   };
-
   await transporter.sendMail(mailOptions);
 };
 

@@ -28,3 +28,5 @@
 - [ ] Item model
 - [ ] missing task CRUD interface
 - [ ] add links to task DTO
+- [x] use scopes
+- [x] some pagination
