@@ -3,7 +3,6 @@ const { Op } = require("sequelize");
 const Task = require("./task.model");
 const User = require("../users/user.model");
 const taskDTO = require("./task.dto");
-const TaskMailer = require("./task.mailer");
 const { TaskMailerQueue } = require("./task.mailer.queue");
 const TaskRepository = require("./task.repository");
 
@@ -66,7 +65,21 @@ const complete = async(req, res) => {
 }
 
 const update = async(req, res) => {
+  const task = await Task.findByPk(req.params.id);
 
+  const taskParams = {
+    title: req.body.title,
+    body: req.body.body,
+    deadlineAt: req.body.deadline,
+  };
+
+  try {
+    await task.update(taskParams)
+    res.status(204).send("ok");
+  }
+  catch(errors){
+    res.status(422).json({ errors })
+  }
 }
 
 const destroy = async(req, res) => {
