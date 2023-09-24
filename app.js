@@ -10,6 +10,7 @@ const { i18nextMiddleware } = require("./config/locales.config");
 const { setCurrentUser } = require("./middlewares/currentUser");
 const userRouter = require("./users/user.router");
 const taskRouter = require("./tasks/task.router");
+const itemRouter = require("./items/item.router");
 
 const homeController = require("./home.controller");
 
@@ -34,6 +35,7 @@ app.use(setCurrentUser);
 app.use("/", homeController);
 app.use("/users", userRouter);
 app.use("/tasks", taskRouter);
+app.use("/items", itemRouter);
 
 db.sequelize
   .sync({ alter: true })

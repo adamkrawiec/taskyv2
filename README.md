@@ -12,13 +12,13 @@
 - [x] middleware and store userID in cookies
 - [x] basic nodemailer setup
 - [ ] nodemailer and maildev to work with docker
+- [ ] introduce docker compose
 - [x] template for mailer
 - [ ] consider moving for email-templates
-- [ ] setup redis
-- [ ] nodemailer to work with bull.js - send emails in queues
-- [ ] introduce docker compose
-- [x] internationalization
 - [ ] move to mailtrap
+- [x] setup redis
+- [x] nodemailer to work with bull.js - send emails in queues
+- [x] internationalization
 - [x] some basic queries
 - [ ] refactor to task repository
 - [x] marking tasks as complete
@@ -26,7 +26,8 @@
 - [ ] some tests actually written
 - [ ] Activity model
 - [ ] Item model
-- [ ] missing task CRUD interface
-- [ ] add links to task DTO
+- [x] missing task CRUD interface
+- [x] add links to task DTO
 - [x] use scopes
 - [x] some pagination
+- [x] migrations
