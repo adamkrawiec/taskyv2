@@ -37,5 +37,9 @@
   },
   "devDependencies": {
     "sequelize-cli": "^6.6.1"
+  },
+  "imports": {
+    "#users/*": "./users/*.js",
+    "#items/*": "./items/*.js",
   }
 }

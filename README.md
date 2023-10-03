@@ -26,6 +26,8 @@
 - [ ] some tests actually written
 - [ ] Activity model
 - [ ] Item model
+- [ ] Item Task relation
+- [ ] Item DPO and Controlle
 - [x] missing task CRUD interface
 - [x] add links to task DTO
 - [x] use scopes
