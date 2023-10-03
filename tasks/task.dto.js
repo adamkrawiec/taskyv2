@@ -1,4 +1,5 @@
-const { userDTO } = require("../users/user.dto");
+const { userDTO } = require("#users/user.dto");
+const itemDTO = require("#items/item.dto");
 
 const taskDTO = (task) => {
   return {
@@ -10,7 +11,7 @@ const taskDTO = (task) => {
     deadlineAt: task.deadlineAt,
 
     user: task.user && userDTO(task.user),
-    item: task.item,
+    item: task.item && itemDTO(task.item),
 
     _links: {
       self: `/tasks/${task.id}`,

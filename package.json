@@ -40,6 +40,6 @@
   },
   "imports": {
     "#users/*": "./users/*.js",
-    "#items/*": "./items/*.js",
+    "#items/*": "./items/*.js"
   }
 }
