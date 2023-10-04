@@ -1,4 +1,4 @@
-const { userDTO } = require("#users/user.dto");
+const { userDTO } = require("#app/users/user.dto");
 
 const itemDTO = (item) => {
   return {

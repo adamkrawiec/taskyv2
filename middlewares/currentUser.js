@@ -1,4 +1,4 @@
-const User = require("../users/user.model");
+const User = require("#app/users/user.model");
 
 const setCurrentUser = async function (req, res, next) {
   const { user_id } = req.cookies;

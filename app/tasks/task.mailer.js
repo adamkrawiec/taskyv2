@@ -1,4 +1,4 @@
-const { mailDefaultOptions, transporter } = require("../config/mail.config")
+const { mailDefaultOptions, transporter } = require("#config/mail.config")
 
 const emailCreated = async (task, user) => {
   const mailOptions = {

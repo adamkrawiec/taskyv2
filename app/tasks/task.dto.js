@@ -1,5 +1,5 @@
-const { userDTO } = require("#users/user.dto");
-const itemDTO = require("#items/item.dto");
+const { userDTO } = require("#app/users/user.dto");
+const itemDTO = require("#app/items/item.dto");
 
 const taskDTO = (task) => {
   return {

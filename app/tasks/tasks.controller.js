@@ -1,8 +1,8 @@
 const { Op } = require("sequelize");
 
 const Task = require("./task.model");
-const User = require("#users/user.model");
-const Item = require("#items/item.model");
+const User = require("#app/users/user.model");
+const Item = require("#app/items/item.model");
 const taskDTO = require("./task.dto");
 const { TaskMailerQueue } = require("./task.mailer.queue");
 const TaskRepository = require("./task.repository");
