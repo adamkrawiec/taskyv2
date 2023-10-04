@@ -1,7 +1,7 @@
 const express = require("express");
 const Item = require("./item.model");
 const itemDTO = require("./item.dto");
-const User = require("#users/user.model");
+const User = require("#app/users/user.model");
 
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 const { Op } = require("sequelize");
 
 const Task = require("./task.model");
-const User = require("../users/user.model");
+const User = require("#app/users/user.model");
 
 const findTask = async(id) => await Task.findByPk(id);
 

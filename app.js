@@ -8,11 +8,11 @@ var cookieParser = require('cookie-parser')
 const db = require("./db");
 const { i18nextMiddleware } = require("./config/locales.config");
 const { setCurrentUser } = require("./middlewares/currentUser");
-const userRouter = require("./users/user.router");
-const taskRouter = require("./tasks/task.router");
-const itemRouter = require("./items/item.router");
+const userRouter = require("#app/users/user.router");
+const taskRouter = require("#app/tasks/task.router");
+const itemRouter = require("#app/items/item.router");
 
-const homeController = require("./home.controller");
+const homeController = require("#app/home.controller");
 
 const PORT = 3000;
 

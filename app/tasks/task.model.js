@@ -1,8 +1,8 @@
 const { Sequelize, DataTypes, Op } = require('sequelize');
-const { sequelize } = require("../db");
+const { sequelize } = require("#db");
 const TaskStatuses = require("./statuses");
-const User = require("../users/user.model");
-const Item = require("../items/item.model");
+const User = require("#app/users/user.model");
+const Item = require("#app/items/item.model");
 
 const Task = sequelize.define("task", {
   id: {
