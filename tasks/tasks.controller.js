@@ -1,7 +1,8 @@
 const { Op } = require("sequelize");
 
 const Task = require("./task.model");
-const User = require("../users/user.model");
+const User = require("#users/user.model");
+const Item = require("#items/item.model");
 const taskDTO = require("./task.dto");
 const { TaskMailerQueue } = require("./task.mailer.queue");
 const TaskRepository = require("./task.repository");
@@ -15,10 +16,10 @@ const index = async (req, res) => {
 };
 
 const showById = async (req, res) => {
-  const task = await Task.findByPk(req.params.id);
+  const task = await Task.findByPk(req.params.id, { include: [User, Item] });
   const taskdto = taskDTO(task);
 
-  res.json({ data: task });
+  res.json({ data: taskdto });
 };
 
 const showByUserId = async (req, res) => {

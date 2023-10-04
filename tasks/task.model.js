@@ -2,6 +2,7 @@ const { Sequelize, DataTypes, Op } = require('sequelize');
 const { sequelize } = require("../db");
 const TaskStatuses = require("./statuses");
 const User = require("../users/user.model");
+const Item = require("../items/item.model");
 
 const Task = sequelize.define("task", {
   id: {
@@ -28,10 +29,12 @@ const Task = sequelize.define("task", {
   },
 })
 
-User.hasMany(Task, {
-  foreignKey: 'userId'
-});
 Task.belongsTo(User);
+User.hasMany(Task, { foreignKey: 'userId' });
+
+Task.belongsTo(Item, { foreignKey: 'itemId' });
+Item.hasMany(Task, { foreignKey: 'itemId' });
+
 
 Task.addScope('overdue', {
   where: {
