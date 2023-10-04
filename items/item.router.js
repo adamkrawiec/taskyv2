@@ -1,6 +1,7 @@
 const express = require("express");
 const Item = require("./item.model");
-const User = require("../users/user.model");
+const itemDTO = require("./item.dto");
+const User = require("#users/user.model");
 
 const router = express.Router();
 
@@ -20,9 +21,9 @@ router.post("/", async(req, res) => {
 });
 
 router.get("/:id", async(req, res) => {
-  const item = await findItem(req.params.id);
+  const item = await findItem(req.params.id, { include: [User]});
 
-  res.json({ item });
+  res.json({ item: itemDTO(item) });
 });
 
 router.put("/:id", async(req, res) => {
