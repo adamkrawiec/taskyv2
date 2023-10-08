@@ -1,0 +1,56 @@
+const Item = require("./item.model");
+const itemDTO = require("./item.dto");
+const User = require("#app/users/user.model");
+
+const index = async (req, res) => {
+  const items = await Item.findAll({ include: User });
+
+  const itemData = items.map((item) => itemDTO(item));
+  res.json( { items: itemData });
+}
+
+const create = async(req, res) => {
+  try {
+    const item = await Item.create(itemParams(req));
+    res.json({ item });
+  } catch({ errors }) {
+    res.status(422).json({ errors })
+  };
+};
+
+const show = async(req, res) => {
+  const item = await findItem(req.params.id, { include: [User]});
+
+  res.json({ item: itemDTO(item) });
+};
+
+const update = async(req, res) => {
+  const item = await findItem(req.params.id);
+
+  try {
+    item.update(itemParams(req));
+    res.json({ item });
+  } catch({ errors }) {
+    res.status(422).json({ errors });
+  }
+};
+
+const findItem = async (id) => await Item.findByPk(id, { include: User });
+
+const itemParams = (req) => {
+  return {
+    title: req.body.title,
+    url: req.body.url,
+    body: req.body.body,
+    addedById: req.currentUser.id,
+    visibility: req.body.visibility || "hidden"
+  }
+};
+
+
+module.exports = {
+  index,
+  create,
+  show,
+  update,
+}

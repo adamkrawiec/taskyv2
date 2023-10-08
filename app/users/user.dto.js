@@ -7,11 +7,27 @@ const userDTO = (user) => {
     updatedAt: user.updatedAt,
 
     _links: {
-      self: `/users/${user.id}`
+      self: `/users/${user.id}`,
+    }
+  }
+}
+
+const fullUserDTO = (user) => {
+  return {
+    id: user.id,
+    fullName: user.fullName,
+    email: user.email,
+    createdAt: user.createdAt,
+    updatedAt: user.updatedAt,
+
+    _links: {
+      self: `/users/${user.id}`,
+      myTasks: `/tasks/${user.id}`,
     }
   }
 }
 
 module.exports = {
   userDTO,
+  fullUserDTO
 }

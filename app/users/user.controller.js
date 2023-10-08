@@ -1,5 +1,5 @@
 const User = require("./user.model");
-const { userDTO } = require("./user.dto");
+const { userDTO, fullUserDTO } = require("./user.dto");
 
 const create = async (req, res) => {
   const userParams = {
@@ -25,7 +25,7 @@ const findAll = (req, res) => {
 const findOne = async (req, res) => {
   const user = await User.findByPk(req.params.id);
 
-  if(user) return res.json(userDTO(user))
+  if(user) return res.json(fullUserDTO(user))
 
   res.status(404).send("not found");
 }
@@ -58,5 +58,5 @@ module.exports = {
   findAll,
   findOne,
   updateOne,
-  destroyOne,
+  destroyOne
 }
