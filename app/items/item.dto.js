@@ -12,6 +12,7 @@ const itemDTO = (item) => {
 
     _links: {
       self: `/items/${item.id}`,
+      tasks: `/items/${item.id}/tasks`
     }
   }
 }

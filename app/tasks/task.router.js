@@ -4,18 +4,17 @@ const tasksController = require("./tasks.controller");
 
 const router = express.Router();
 
-router.get("/", tasksController.index);
-router.get("/my", tasksController.myTasks);
-router.get("/summary", tasksController.summary);
-router.get("/:id", tasksController.showById);
-router.get("/user/:userId", tasksController.showByUserId);
+router.route("/").get(tasksController.index)
+                 .post(tasksController.create);
 
-router.post("/", tasksController.create);
-
-router.put("/:id", tasksController.update);
+router.route("/:id").get(tasksController.showById)
+                    .put(tasksController.update)
+                    .delete(tasksController.destroy);
 
 router.patch("/:id/complete", tasksController.complete);
 
-router.delete("/:id", tasksController.destroy);
+router.get("/my", tasksController.myTasks);
+router.get("/summary", tasksController.summary);
+router.get("/user/:userId", tasksController.showByUserId);
 
 module.exports = router;

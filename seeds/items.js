@@ -1,4 +1,4 @@
-const Item = require("../items/item.model");
+const Item = require("#app/items/item.model");
 
 const itemsData = [
   {

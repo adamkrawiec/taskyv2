@@ -33,3 +33,13 @@
 - [x] use scopes
 - [x] some pagination
 - [x] migrations
+- [ ] batch action assign task (+ background processing)
+- [ ] reporting
+- [ ] quizzes
+- [ ] collections/learning lists
+- [x] tasks summary for item with 1 query
+- [x] summary of tasks for item
+- [ ] list of items by most tasks
+- [ ] list of items by most completed tasks
+- [ ] list of items by most overdue tasks
+- [ ]
