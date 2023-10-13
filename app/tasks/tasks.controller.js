@@ -16,10 +16,16 @@ const index = async (req, res) => {
 };
 
 const showById = async (req, res) => {
-  const task = await Task.findByPk(req.params.id, { include: [User, Item] });
-  const taskdto = taskDTO(task);
+  try {
+    const task = await Task.findByPk(req.params.id, { include: [User, Item] });
+    const taskdto = taskDTO(task);
 
-  res.json({ data: taskdto });
+    res.json({ data: taskdto });
+  }
+
+  catch(error) {
+    res.status(404).json({ error })
+  }
 };
 
 const showByUserId = async (req, res) => {

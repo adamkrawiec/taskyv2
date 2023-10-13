@@ -14,7 +14,13 @@ const User = sequelize.define('user', {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true
-  }
+  },
+  invitedAt: {
+    type: DataTypes.DATE
+  },
+  acceptedAt: {
+    type: DataTypes.DATE
+  },
 })
 
 module.exports = User;

@@ -1,6 +1,5 @@
 const { Sequelize, DataTypes, Op } = require('sequelize');
 const { sequelize } = require("#db");
-const TaskStatuses = require("./statuses");
 const User = require("#app/users/user.model");
 const Item = require("#app/items/item.model");
 
@@ -9,17 +8,6 @@ const Task = sequelize.define("task", {
     type: DataTypes.INTEGER,
     autoIncrement: true,
     primaryKey: true
-  },
-  title: {
-    type: DataTypes.STRING,
-  },
-  body: {
-    type: DataTypes.STRING,
-  },
-  status: {
-    type: DataTypes.ENUM(TaskStatuses),
-    defaultValue: TaskStatuses[0],
-    allowNull: false
   },
   completedAt: {
     type: DataTypes.DATE

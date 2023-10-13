@@ -5,6 +5,8 @@ const userDTO = (user) => {
     email: user.email,
     createdAt: user.createdAt,
     updatedAt: user.updatedAt,
+    invitedAt: user.invitedAt,
+    acceptedAt: user.acceptedAt,
 
     _links: {
       self: `/users/${user.id}`,
@@ -22,7 +24,7 @@ const fullUserDTO = (user) => {
 
     _links: {
       self: `/users/${user.id}`,
-      myTasks: `/tasks/${user.id}`,
+      myTasks: `/tasks/user/${user.id}`,
     }
   }
 }

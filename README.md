@@ -43,4 +43,5 @@
 - [ ] list of items by most completed tasks
 - [ ] list of items by most overdue tasks
 - [ ] clean up seeders/seeds
-- [ ] add more seeds
+- [ ] add more seeds / fake data
+- [ ] install dayJS and use it
