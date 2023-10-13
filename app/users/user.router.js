@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.post("/", userController.create);
 router.get("/", userController.findAll);
+router.get("/leaderboard", userController.getLeaderboard);
 router.get("/:id", userController.findOne);
 router.put("/:id", userController.updateOne);
 router.delete("/:id", userController.destroyOne);

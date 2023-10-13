@@ -1,5 +1,6 @@
 const User = require("./user.model");
 const { userDTO, fullUserDTO } = require("./user.dto");
+const { getUsersByMostCompletedTasks } = require("./user-tasks/leaderboard");
 
 const create = async (req, res) => {
   const userParams = {
@@ -53,10 +54,18 @@ const destroyOne = async (req, res) => {
   res.status(204).send("ok");
 }
 
+const getLeaderboard = async (req, res) => {
+  const users = await getUsersByMostCompletedTasks();
+
+  // let usersData = users.map((user) => userDTO(user));
+  res.json({ data: users });
+}
+
 module.exports = {
   create,
   findAll,
   findOne,
   updateOne,
-  destroyOne
+  destroyOne,
+  getLeaderboard
 }
