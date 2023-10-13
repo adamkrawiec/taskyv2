@@ -4,8 +4,6 @@ const itemDTO = require("#app/items/item.dto");
 const taskDTO = (task) => {
   return {
     id: task.id,
-    title: task.title,
-    status: task.status,
     createdAt: task.createdAt,
     completedAt: task.completedAt,
     deadlineAt: task.deadlineAt,
