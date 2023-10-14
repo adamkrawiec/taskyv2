@@ -18,7 +18,10 @@ const create = async (req, res) => {
 const findAll = (req, res) => {
   User.findAll().then((data) => {
     const users = data.map((user) => userDTO(user));
-    res.json(users)
+    const links = {
+      leaderboard: '/users/leaderboard'
+    }
+    res.json({ links, users })
   })
 }
 

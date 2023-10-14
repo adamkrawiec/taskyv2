@@ -8,9 +8,14 @@ var cookieParser = require('cookie-parser')
 const db = require("./db");
 const { i18nextMiddleware } = require("./config/locales.config");
 const { setCurrentUser } = require("./middlewares/currentUser");
+
+const { USERS_ROOT_PATH } = require("#app/users/users.paths");
+const { TASKS_ROOT_PATH } = require("#app/tasks/tasks.paths");
+
 const userRouter = require("#app/users/user.router");
 const taskRouter = require("#app/tasks/task.router");
 const itemRouter = require("#app/items/item.router");
+
 
 const homeController = require("#app/home.controller");
 
@@ -33,8 +38,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(setCurrentUser);
 
 app.use("/", homeController);
-app.use("/users", userRouter);
-app.use("/tasks", taskRouter);
+app.use(USERS_ROOT_PATH, userRouter);
+app.use(TASKS_ROOT_PATH, taskRouter);
 app.use("/items", itemRouter);
 
 db.sequelize
