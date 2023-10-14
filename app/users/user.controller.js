@@ -1,6 +1,5 @@
 const User = require("./user.model");
 const { userDTO, fullUserDTO } = require("./user.dto");
-const { getUsersByMostCompletedTasks } = require("./user-tasks/leaderboard");
 
 const create = async (req, res) => {
   const userParams = {
@@ -19,7 +18,10 @@ const create = async (req, res) => {
 const findAll = (req, res) => {
   User.findAll().then((data) => {
     const users = data.map((user) => userDTO(user));
-    res.json(users)
+    const links = {
+      leaderboard: '/users/leaderboard'
+    }
+    res.json({ links, users })
   })
 }
 
@@ -54,18 +56,10 @@ const destroyOne = async (req, res) => {
   res.status(204).send("ok");
 }
 
-const getLeaderboard = async (req, res) => {
-  const users = await getUsersByMostCompletedTasks();
-
-  // let usersData = users.map((user) => userDTO(user));
-  res.json({ data: users });
-}
-
 module.exports = {
   create,
   findAll,
   findOne,
   updateOne,
-  destroyOne,
-  getLeaderboard
+  destroyOne
 }
