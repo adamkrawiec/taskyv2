@@ -1,4 +1,4 @@
-const { sendMailQueue } = require ("#queues/mail_queue");
+const { sendMailQueue } = require("#queues/mail_queue");
 const TaskMailer = require("./task.mailer");
 
 sendMailQueue.process(async (job, done) => {

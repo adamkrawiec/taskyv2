@@ -13,8 +13,8 @@ const findTasks = async (req) => {
 
   if(req.query.completed) conditions['completedAt'] = { [Op.not]: null }
   if(req.query.title) conditions['title'] = { [Op.substring]: req.query.title }
-  if(req.query.user_id) conditions['userId'] = req.query.user_id
-  if(req.query.item_id) conditions['itemId'] = req.query.item_id
+  if(req.query.user_id) conditions['userId'] = parseInt(req.query.user_id);
+  if(req.query.item_id) conditions['itemId'] = parseInt(req.query.item_id);
 
   return await Task.findAll({
     where: conditions,

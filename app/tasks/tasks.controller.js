@@ -51,15 +51,15 @@ const create = async (req, res) => {
 
   const taskParams = {
     userId: req.body.user_id,
-    title: req.body.title,
-    body: req.body.body,
+    itemId: req.body.item_id,
     deadlineAt: req.body.deadline,
   }
+  console.log(taskParams)
 
   try {
     const task = await Task.create(taskParams);
     await TaskMailerQueue.add({ task, user })
-    res.json(task);
+    res.json(taskDTO(task));
   } catch(errors) {
     res.status(422).json({ errors })
   }
