@@ -1,6 +1,8 @@
+require('dotenv').config()
 const { Sequelize } = require("sequelize");
-const dbConfig = require("./config/db.config");
 const { Client } = require("pg");
+
+const dbConfig = require("./config/db.config")[process.env.NODE_ENV];
 
 async function ensureDB() {
   const client = new Client({
@@ -11,7 +13,7 @@ async function ensureDB() {
 
   client.connect();
   try {
-    const res = await client.query('CREATE DATABASE "tasky"');
+    const res = await client.query(`CREATE DATABASE "${dbConfig.db_name}"`);
     console.log('DB is successfully created');
   } catch (err) {
     console.log(err.stack);
