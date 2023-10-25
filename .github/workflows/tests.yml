@@ -19,7 +19,7 @@ jobs:
         env:
           USER: postgres
           password: postgresadmin
-          NAME: "tasky_test",
+          NAME: "tasky_test"
         ports:
         - 5432:5432
 
