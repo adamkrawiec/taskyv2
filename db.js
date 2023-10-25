@@ -13,7 +13,7 @@ async function ensureDB() {
 
   client.connect();
   try {
-    const res = await client.query(`CREATE DATABASE "${dbConfig.db_name}"`);
+    const res = await client.query(`CREATE DATABASE "${dbConfig.NAME}"`);
     console.log('DB is successfully created');
   } catch (err) {
     console.log(err.stack);
@@ -25,7 +25,7 @@ async function ensureDB() {
 function initDB() {
   ensureDB();
   return new Sequelize(
-    dbConfig.DB,
+    dbConfig.NAME,
     dbConfig.USER,
     dbConfig.PASSWORD,
     {
