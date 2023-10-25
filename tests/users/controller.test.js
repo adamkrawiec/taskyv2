@@ -1,4 +1,4 @@
-const User = require("#app/users/user.model");
+const User = require('#app/users/user.model');
 
 const {
   connectDB,
@@ -9,14 +9,18 @@ const {
 
 describe('User Endpoints', () => {
   let user
+  let response
 
   beforeAll(async () => {
     await connectDB();
 
     user = await User.create({
-      fullName: "Test User",
-      email: "test-user@example.com",
-      "createdAt": "2023-10-20T22:23:32.609Z",
+      fullName: 'Test User',
+      email: 'test-user@example.com',
+      createdAt: '2023-10-20T22:23:32.609Z',
+      updatedAt: '2023-10-20T22:23:32.609Z',
+      invitedAt: '2023-10-22T22:23:32.609Z',
+      acceptedAt: '2023-10-22T22:23:32.609Z',
     });
   });
 
@@ -25,35 +29,56 @@ describe('User Endpoints', () => {
     await disconnectWorkers();
   });
 
-  it('GET /users should show all users', async () => {
-    const res = await requestApp.get('/users');
+  describe('GET /users', () =>{
+    beforeAll(async() => {
+      response = await requestApp.get('/users');
+    });
 
-    expect(res.status).toEqual(200);
-    expect(res.body).toHaveProperty('users');
-    // expect(res.body.users).toContain({
-    //   id: 1,
-    //   fullName: "Test User",
-    //   email: "test-user@example.com",
-    //   "createdAt": "2023-10-20T22:23:32.609Z",
-    //   _links: {
-    //     self: '/users/1'
-    //   }
-    // });
+    it('response returns status 200', async () => {
+      expect(response.status).toEqual(200);
+    });
+
+    it('response returns links', () => {
+      expect(response.body).toHaveProperty('links');
+    });
+
+    it('response returns array of users', () => {
+      expect(response.body).toHaveProperty('users');
+      expect(response.body.users).toContainEqual(
+        {
+          id: 1,
+          fullName: 'Test User',
+          email: 'test-user@example.com',
+          'createdAt': '2023-10-20T22:23:32.609Z',
+          _links: {
+            self: '/users/1'
+          }
+        }
+      );
+    });
   });
 
-  it('GET /user/:id should show all users', async () => {
-    const res = await requestApp.get(`/users/${user.id}`);
+  describe('GET /users/:id', () => {
+    beforeAll(async() => {
+      response = await requestApp.get(`/users/${user.id}`);
+    });
 
-    expect(res.status).toEqual(200);
-    // expect(res.body.users).toContain({
-    //   id: 1,
-    //   fullName: "Test User",
-    //   email: "test-user@example.com",
-    //   "createdAt": "2023-10-20T22:23:32.609Z",
-    //   _links: {
-    //     self: '/users/1'
-    //   }
-    // });
+    it('response returns status 200', async () => {
+      expect(response.status).toEqual(200);
+    });
+
+    it('response returns user details', () => {
+      expect(response.body).toEqual(
+        {
+          id: 1,
+          fullName: 'Test User',
+          email: 'test-user@example.com',
+          createdAt: '2023-10-20T22:23:32.609Z',
+          invitedAt: '2023-10-22T22:23:32.609Z',
+          acceptedAt: '2023-10-22T22:23:32.609Z',
+          _links: { self: '/users/1', tasks: '/tasks/user/1' }
+        }
+      );
+    });
   });
-
 });

@@ -21,7 +21,6 @@ const fullUserDTO = (user) => {
     fullName: user.fullName,
     email: user.email,
     createdAt: user.createdAt,
-    updatedAt: user.updatedAt,
     invitedAt: user.invitedAt,
     acceptedAt: user.acceptedAt,
 
