@@ -15,7 +15,7 @@ module.exports = {
     }
   },
   test: {
-    HOST: "localhost",
+    HOST: process.env.DB_HOST || "localhost",
     USER: "postgres",
     PASSWORD: "postgresadmin",
     NAME: "tasky_test",
