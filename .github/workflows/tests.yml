@@ -17,7 +17,7 @@ jobs:
       db:
         image: postgres:13.0
         env:
-          POSTGRES_PUSER: postgres
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgresadmin
           POSTGRES_DB: tasky_test
         ports:
@@ -35,7 +35,7 @@ jobs:
         with:
           node-version: ${{ env.node-version }}
       - name: Install dependencies
-        run: npm install
+        run: npm ci
       - name: migrate database
         run: npx sequelize-cli db:migrate
         env:
@@ -46,5 +46,3 @@ jobs:
           POSTGRES_HOST: localhost
           # The default PostgreSQL port
           POSTGRES_PORT: 5432
-          env:
-            DB_HOST: "postgres://postgres:postgres@localhost:5432/tasky_test"

@@ -2,7 +2,7 @@ require('dotenv').config();
 
 module.exports = {
   development: {
-    HOST: process.env.DB_HOST || "localhost",
+    HOST: process.env.POSTGRES_HOST || "localhost",
     USER: process.env.DB_USER || "postgres",
     PASSWORD: process.env.DB_PASSWORD || "postgresadmin",
     NAME: process.env.DB || "tasky",
@@ -15,7 +15,7 @@ module.exports = {
     }
   },
   test: {
-    HOST: process.env.DB_HOST || "localhost",
+    HOST: process.env.POSTGRES_HOST || "localhost",
     USER: "postgres",
     PASSWORD: "postgresadmin",
     NAME: "tasky_test",
