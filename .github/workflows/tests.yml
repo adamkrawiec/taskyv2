@@ -18,7 +18,7 @@ jobs:
         image: postgres:13.0
         env:
           USER: postgres
-          password: postgresadmin
+          POSTGRES_PASSWORD: postgresadmin
           NAME: "tasky_test"
         ports:
         - 5432:5432
