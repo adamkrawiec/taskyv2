@@ -37,7 +37,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: migrate database
-        run: npx sequelize-cli db:migrate
+        run: cross-env NODE_ENV=test npx sequelize-cli db:migrate
         env:
           DB_HOST: "postgres://postgres:postgres@localhost:5432/tasky_test"
       - run: npm test
