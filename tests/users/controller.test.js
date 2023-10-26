@@ -90,11 +90,11 @@ describe('User Endpoints', () => {
       });
     });
 
-    it('response returns status 200', async() => {
+    it('response returns status 200', () => {
       expect(response.status).toEqual(200)
     });
 
-    it('response returns created user data', async() => {
+    it('response returns created user data', () => {
       expect(response.body).toMatchObject(
         {
           id: 2,
@@ -103,5 +103,37 @@ describe('User Endpoints', () => {
         }
       )
     });
-  })
+  });
+
+  describe('PUT /users/:id', () => {
+    beforeAll(async() => {
+      response = await requestApp.put(`/users/${user.id}`).send({
+        fullName: 'User Name updated'
+      });
+    });
+
+    it('response returns status 200', () => {
+      expect(response.status).toEqual(200);
+    });
+
+    it('changes user name', async () => {
+      await user.reload();
+      expect(user.fullName).toEqual('User Name updated');
+    });
+  });
+
+  describe('DELETE /users/:id', () => {
+    beforeAll(async() => {
+      response = await requestApp.delete(`/users/${user.id}`);
+    });
+
+    it("response returns status 204", () =>
+      expect(response.status).toEqual(204)
+    );
+
+    it('deletes record from db', async () => {
+      let record = await User.findByPk(user.id);
+      expect(record).toBeNull();
+    });
+  });
 });
