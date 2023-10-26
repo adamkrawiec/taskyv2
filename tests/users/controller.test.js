@@ -81,4 +81,27 @@ describe('User Endpoints', () => {
       );
     });
   });
+
+  describe('POST /users', () => {
+    beforeAll(async() => {
+      response = await requestApp.post('/users').send({
+        fullName: "Post Users test",
+        email: "put@example.com"
+      });
+    });
+
+    it('response returns status 200', async() => {
+      expect(response.status).toEqual(200)
+    });
+
+    it('response returns created user data', async() => {
+      expect(response.body).toMatchObject(
+        {
+          id: 2,
+          fullName: 'Post Users test',
+          email: 'put@example.com',
+        }
+      )
+    });
+  })
 });
