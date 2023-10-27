@@ -1,12 +1,9 @@
-const Item = require("#app/items/item.model");
-const itemDTO = require("#app/items/item.dto");
+const Item = require('#app/items/item.model');
+const TaskDTO = require('#app/tasks/task.dto');
 
-const Task = require("#app/tasks/task.model");
-const TaskDTO = require("#app/tasks/task.dto");
+const User = require('#app/users/user.model');
 
-const User = require("#app/users/user.model");
-
-const { getItemTasksSummary } = require("./item-task-summary");
+const { getItemTasksSummary } = require('./item-task-summary');
 
 const getTasks = async(req, res) => {
   const item = await Item.findByPk(req.params.id);
@@ -26,4 +23,4 @@ const getTaskSummary = async(req, res) => {
 module.exports = {
   getTasks,
   getTaskSummary
-}
+};

@@ -1,5 +1,5 @@
-const { userPath } = require("./users.paths");
-const { userTasksPath } = require("#app/tasks/tasks.paths");
+const { userPath } = require('./users.paths');
+const { userTasksPath } = require('#app/tasks/tasks.paths');
 
 const userDTO = (user) => {
   return {
@@ -12,8 +12,8 @@ const userDTO = (user) => {
     _links: {
       self: userPath(user),
     }
-  }
-}
+  };
+};
 
 const fullUserDTO = (user) => {
   return {
@@ -28,10 +28,10 @@ const fullUserDTO = (user) => {
       self: userPath(user),
       tasks: userTasksPath(user),
     }
-  }
-}
+  };
+};
 
 module.exports = {
   userDTO,
   fullUserDTO
-}
+};

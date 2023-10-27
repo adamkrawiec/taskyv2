@@ -1,4 +1,4 @@
-const { userDTO } = require("#app/users/user.dto");
+const { userDTO } = require('#app/users/user.dto');
 
 const itemDTO = (item) => {
   return {
@@ -14,7 +14,7 @@ const itemDTO = (item) => {
       self: `/items/${item.id}`,
       tasks: `/items/${item.id}/tasks`
     }
-  }
-}
+  };
+};
 
 module.exports = itemDTO;

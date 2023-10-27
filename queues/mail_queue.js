@@ -1,6 +1,5 @@
-const Queue = require("bull");
-const nodemailer = require("nodemailer");
-const redisConfig = require("../config/redis.config");
+const Queue = require('bull');
+const redisConfig = require('../config/redis.config');
 
 const sendMailQueue = new Queue('sendMail', {
   redis: redisConfig
@@ -8,4 +7,4 @@ const sendMailQueue = new Queue('sendMail', {
 
 module.exports = {
   sendMailQueue,
-}
+};

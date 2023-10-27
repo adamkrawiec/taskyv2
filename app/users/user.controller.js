@@ -1,60 +1,60 @@
-const User = require("./user.model");
-const { userDTO, fullUserDTO } = require("./user.dto");
+const User = require('./user.model');
+const { userDTO, fullUserDTO } = require('./user.dto');
 
 const create = async (req, res) => {
   const userParams = {
     fullName: req.body.fullName,
     email: req.body.email
-  }
+  };
 
   try {
     const user = await User.create(userParams);
     res.json(userDTO(user));
   } catch({ errors }) {
-    res.status(422).json({ errors })
+    res.status(422).json({ errors });
   }
-}
+};
 
 const findAll = (req, res) => {
   User.findAll().then((data) => {
     const users = data.map((user) => userDTO(user));
     const links = {
       leaderboard: '/users/leaderboard'
-    }
-    res.json({ links, users })
-  })
-}
+    };
+    res.json({ links, users });
+  });
+};
 
 const findOne = async (req, res) => {
   const user = await User.findByPk(req.params.id);
 
-  if(user) return res.json(fullUserDTO(user))
+  if(user) return res.json(fullUserDTO(user));
 
-  res.status(404).send("not found");
-}
+  res.status(404).send('not found');
+};
 
 const updateOne = async (req, res) => {
   const userParams = {
     fullName: req.body.fullName,
     email: req.body.email
-  }
+  };
   const user = await User.findByPk(req.params.id);
 
-  if (!user) return res.status(404).send("not found");
+  if (!user) return res.status(404).send('not found');
 
   try {
     await user.update(userParams);
     res.json(userDTO(user));
   } catch({ errors }) {
-    res.status(422).json({ errors })
+    res.status(422).json({ errors });
   }
-}
+};
 
 const destroyOne = async (req, res) => {
   const user = await User.findByPk(req.params.id);
   await user.destroy();
-  res.status(204).send("ok");
-}
+  res.status(204).send('ok');
+};
 
 module.exports = {
   create,
@@ -62,4 +62,4 @@ module.exports = {
   findOne,
   updateOne,
   destroyOne
-}
+};

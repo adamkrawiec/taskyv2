@@ -1,5 +1,5 @@
-const { userDTO } = require("#app/users/user.dto");
-const itemDTO = require("#app/items/item.dto");
+const { userDTO } = require('#app/users/user.dto');
+const itemDTO = require('#app/items/item.dto');
 
 const taskDTO = (task) => {
   return {
@@ -18,7 +18,7 @@ const taskDTO = (task) => {
       update: `/tasks/${task.id}`,
       destroy: `/tasks/${task.id}`
     }
-  }
-}
+  };
+};
 
 module.exports = taskDTO;

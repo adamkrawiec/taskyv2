@@ -1,6 +1,6 @@
-const Task = require("./task.model");
-const User = require("#app/users/user.model");
-const { TaskMailerQueue } = require("./task.mailer.queue");
+const Task = require('./task.model');
+const User = require('#app/users/user.model');
+const { TaskMailerQueue } = require('./task.mailer.queue');
 
 const addNewTask = async({ userId, itemId, deadlineAt }) => {
   const taskParams = {
@@ -10,10 +10,12 @@ const addNewTask = async({ userId, itemId, deadlineAt }) => {
   };
 
   const task = await Task.create(taskParams);
+  const user = await User.findByPk(userId);
+
   await TaskMailerQueue.add({ task, user });
-  return task
-}
+  return task;
+};
 
 module.exports = {
   addNewTask
-}
+};

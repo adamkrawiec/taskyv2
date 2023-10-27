@@ -1,4 +1,4 @@
-const User = require("#app/users/user.model");
+const User = require('#app/users/user.model');
 
 const setCurrentUser = async function (req, res, next) {
   const { user_id } = req.cookies;
@@ -6,9 +6,9 @@ const setCurrentUser = async function (req, res, next) {
   const user = await User.findByPk(user_id);
   req.currentUser = user;
 
-  next()
-}
+  next();
+};
 
 module.exports = {
   setCurrentUser,
-}
+};
