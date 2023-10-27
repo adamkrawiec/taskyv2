@@ -1,0 +1,44 @@
+name: Run specs
+
+env:
+  node-version: 16.8.0
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    environment: test
+    services:
+      db:
+        image: postgres:13.0
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgresadmin
+          POSTGRES_DB: tasky_test
+        ports:
+        - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - name: Code checkout
+        uses: actions/checkout@v3
+      - name: Setup nodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+      - name: Install dependencies
+        run: npm ci
+      - run: npm test
+        env:
+          # The hostname used to communicate with the PostgreSQL service container
+          POSTGRES_HOST: localhost
+          # The default PostgreSQL port
+          POSTGRES_PORT: 5432

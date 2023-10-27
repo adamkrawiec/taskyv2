@@ -22,7 +22,7 @@
 - [x] some basic queries
 - [ ] refactor to task repository
 - [x] marking tasks as complete
-- [ ] tests setup
+- [x] tests setup & gh action for tests
 - [ ] some tests actually written
 - [ ] Activity model
 - [ ] Item model
@@ -48,3 +48,4 @@
 - [ ] if decided that approach with *.paths.j files, with constants/methods make sense - continue. Otherwise - drop
 - [ ] insights module (user with most overdue, items with most overdue, items most completed, items with highest count of tasks)
 - [ ] service to create task and send email
+- [x] linter & gh action

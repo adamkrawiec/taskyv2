@@ -42,12 +42,13 @@ app.use(USERS_ROOT_PATH, userRouter);
 app.use(TASKS_ROOT_PATH, taskRouter);
 app.use("/items", itemRouter);
 
-db.sequelize
-  .sync({ alter: true })
-  .then(() => {
-    console.log("Synced db.")
-    app.listen(PORT, () => {
-      console.log(`[server]: Server is running on a port ${PORT}`)
-    })
-  })
-  .catch((err) => console.log("Failed to sync db: " + err.message));
+module.exports = app;
+// db.sequelize
+//   .sync({ alter: true })
+//   .then(() => {
+//     console.log("Synced db.")
+//     app.listen(PORT, () => {
+//       console.log(`[server]: Server is running on a port ${PORT}`)
+//     })
+//   })
+//   .catch((err) => console.log("Failed to sync db: " + err.message));
