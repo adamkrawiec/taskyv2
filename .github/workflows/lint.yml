@@ -1,5 +1,8 @@
 name: Linter
 
+env:
+  node-version: 16.8.0
+
 on:
   - push
 
@@ -9,5 +12,9 @@ jobs:
     steps:
       - name: Code checkout
         uses: actions/checkout@v3
-      - name: Linter
-        uses: stefanoeb/eslint-action@1.0.2
+      - name: Setup nodeJS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ env.node-version }}
+      - run: npm install
+      - run: npx eslint .
