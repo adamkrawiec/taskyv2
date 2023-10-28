@@ -3,7 +3,8 @@ const User = require('#app/users/user.model');
 const Item = require('#app/items/item.model');
 const taskDTO = require('./task.dto');
 const TaskRepository = require('./task.repository');
-const { createTask } = require('./create-task.service');
+const { createTask } = require('.services/create-task.service');
+const { completeTask } = require('./services/complete-task.service');
 
 const index = async (req, res) => {
   let tasks = await TaskRepository.findTasks(req);
@@ -45,14 +46,8 @@ const myTasks = async(req, res) => {
 };
 
 const create = async (req, res) => {
-  const taskParams = {
-    userId: req.body.user_id,
-    itemId: req.body.item_id,
-    deadlineAt: req.body.deadline,
-  };
-
   try {
-    const task = await createTask(taskParams);
+    const task = await createTask(permitTaskParams(req));
     res.json(taskDTO(task));
   } catch(errors) {
     res.status(422).json({ errors });
@@ -60,22 +55,15 @@ const create = async (req, res) => {
 };
 
 const complete = async(req, res) => {
-  const task = await Task.findByPk(req.params.id);
-  await task.update({completedAt: Date.now() });
+  await completeTask(req.params.id);
   res.status(204).send('ok');
 };
 
 const update = async(req, res) => {
   const task = await Task.findByPk(req.params.id);
 
-  const taskParams = {
-    title: req.body.title,
-    body: req.body.body,
-    deadlineAt: req.body.deadline,
-  };
-
   try {
-    await task.update(taskParams);
+    await task.update(permitTaskParams(req));
     res.status(204).send('ok');
   }
   catch(errors){
@@ -96,6 +84,13 @@ const summary = async(req, res) => {
 
   res.json({ total, completed, overdue });
 };
+
+const permitTaskParams = (req) => ({
+  title: req.body.title,
+  body: req.body.body,
+  deadlineAt: req.body.deadline,
+});
+
 
 module.exports = {
   create,
