@@ -1,0 +1,18 @@
+const { mailDefaultOptions, transporter } = require('#config/mail.config');
+
+const batchTasksCreateConfirm = async (user, tasks) => {
+  const mailOptions = {
+    from: mailDefaultOptions.from,
+    to: user.email,
+    subject: mailDefaultOptions.i18next.t('mailers.tasks.batch-actions.create.title'),
+    template: 'tasks/batch-actions/create_confirm',
+    context: {
+      count: tasks.length,
+    }
+  };
+  await transporter.sendMail(mailOptions);
+};
+
+module.exports = {
+  batchTasksCreateConfirm,
+};

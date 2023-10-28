@@ -1,21 +1,14 @@
 const User = require('#app/users/user.model');
-const Task = require('../task.model');
-const { TaskMailerQueue } = require('../task.mailer.queue');
+const BatchCreateMailer = require('./mailers/batch-create-mailer.queue');
+const { createTask } = require('../create-task.service');
 
 const batchCreateTasks = async ({ userIds, itemId, deadlineAt, currentUser }) => {
-  User.findAll({ where: { id: userIds }}).then((users) => {
-    users.map(async (user) => {
-      let task = await Task.create({
-        userId: user.id,
-        itemId,
-        deadlineAt
-      });
-      await TaskMailerQueue.add({ task, user });
-    });
-  });
+  let users = await User.findAll({ where: { id: userIds }});
 
-  // A placeholder, please replace with proper mailer
-  await TaskMailerQueue.add({ currentUser });
+  let tasks = await users.map(async (user) =>
+    await createTask({ userId: user.id, itemId, deadlineAt }));
+
+  await BatchCreateMailer.add('task-batch-create-mailer', { currentUser, tasks });
 };
 
 module.exports = batchCreateTasks;

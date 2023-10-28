@@ -2,8 +2,8 @@ const Task = require('./task.model');
 const User = require('#app/users/user.model');
 const Item = require('#app/items/item.model');
 const taskDTO = require('./task.dto');
-const { TaskMailerQueue } = require('./task.mailer.queue');
 const TaskRepository = require('./task.repository');
+const { createTask } = require('./create-task.service');
 
 const index = async (req, res) => {
   let tasks = await TaskRepository.findTasks(req);
@@ -45,18 +45,14 @@ const myTasks = async(req, res) => {
 };
 
 const create = async (req, res) => {
-  const user = await User.findByPk(req.body.user_id);
-
   const taskParams = {
     userId: req.body.user_id,
     itemId: req.body.item_id,
     deadlineAt: req.body.deadline,
   };
-  console.log(taskParams);
 
   try {
-    const task = await Task.create(taskParams);
-    await TaskMailerQueue.add({ task, user });
+    const task = await createTask(taskParams);
     res.json(taskDTO(task));
   } catch(errors) {
     res.status(422).json({ errors });
