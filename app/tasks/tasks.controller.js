@@ -1,17 +1,15 @@
-const { Op } = require("sequelize");
-
-const Task = require("./task.model");
-const User = require("#app/users/user.model");
-const Item = require("#app/items/item.model");
-const taskDTO = require("./task.dto");
-const { TaskMailerQueue } = require("./task.mailer.queue");
-const TaskRepository = require("./task.repository");
+const Task = require('./task.model');
+const User = require('#app/users/user.model');
+const Item = require('#app/items/item.model');
+const taskDTO = require('./task.dto');
+const { TaskMailerQueue } = require('./task.mailer.queue');
+const TaskRepository = require('./task.repository');
 
 const index = async (req, res) => {
   let tasks = await TaskRepository.findTasks(req);
   tasks = tasks.map((task) => taskDTO(task));
 
-  const title = req.t('tasks.index.title')
+  const title = req.t('tasks.index.title');
   res.json({ title, data: tasks });
 };
 
@@ -24,7 +22,7 @@ const showById = async (req, res) => {
   }
 
   catch(error) {
-    res.status(404).json({ error })
+    res.status(404).json({ error });
   }
 };
 
@@ -44,7 +42,7 @@ const myTasks = async(req, res) => {
   const title = req.t('tasks.my.title');
 
   res.json({ title, data: tasks });
-}
+};
 
 const create = async (req, res) => {
   const user = await User.findByPk(req.body.user_id);
@@ -53,23 +51,23 @@ const create = async (req, res) => {
     userId: req.body.user_id,
     itemId: req.body.item_id,
     deadlineAt: req.body.deadline,
-  }
-  console.log(taskParams)
+  };
+  console.log(taskParams);
 
   try {
     const task = await Task.create(taskParams);
-    await TaskMailerQueue.add({ task, user })
+    await TaskMailerQueue.add({ task, user });
     res.json(taskDTO(task));
   } catch(errors) {
-    res.status(422).json({ errors })
+    res.status(422).json({ errors });
   }
 };
 
 const complete = async(req, res) => {
   const task = await Task.findByPk(req.params.id);
-  await task.update({completedAt: Date.now() })
-  res.status(204).send("ok");
-}
+  await task.update({completedAt: Date.now() });
+  res.status(204).send('ok');
+};
 
 const update = async(req, res) => {
   const task = await Task.findByPk(req.params.id);
@@ -81,27 +79,27 @@ const update = async(req, res) => {
   };
 
   try {
-    await task.update(taskParams)
-    res.status(204).send("ok");
+    await task.update(taskParams);
+    res.status(204).send('ok');
   }
   catch(errors){
-    res.status(422).json({ errors })
+    res.status(422).json({ errors });
   }
-}
+};
 
 const destroy = async(req, res) => {
   const task = await Task.findByPk(req.params.id);
-  await user.destroy();
-  res.status(204).send("ok");
-}
+  await task.destroy();
+  res.status(204).send('ok');
+};
 
 const summary = async(req, res) => {
   const total = await Task.count();
   const completed = await Task.scope('completed').count();
-  const overdue = await Task.scope('overdue').count()
+  const overdue = await Task.scope('overdue').count();
 
   res.json({ total, completed, overdue });
-}
+};
 
 module.exports = {
   create,
@@ -112,6 +110,5 @@ module.exports = {
   complete,
   update,
   summary,
-  update,
   destroy
-}
+};

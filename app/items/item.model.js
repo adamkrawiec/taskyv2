@@ -1,8 +1,8 @@
-const { Sequelize, DataTypes} = require('sequelize');
-const { sequelize } = require("#db");
-const User = require("#app/users/user.model");
+const { DataTypes } = require('sequelize');
+const { sequelize } = require('#db');
+const User = require('#app/users/user.model');
 
-const Item = sequelize.define("item", {
+const Item = sequelize.define('item', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -19,12 +19,12 @@ const Item = sequelize.define("item", {
     type: DataTypes.STRING
   },
   visibility: {
-    type: DataTypes.ENUM("hidden", "selected", "all"),
-    defaultValue: "hidden"
+    type: DataTypes.ENUM('hidden', 'selected', 'all'),
+    defaultValue: 'hidden'
   },
 });
 
-User.hasMany(Item, { foreignKey: "addedById" });
-Item.belongsTo(User, { foreignKey: "addedById" });
+User.hasMany(Item, { foreignKey: 'addedById' });
+Item.belongsTo(User, { foreignKey: 'addedById' });
 
 module.exports = Item;

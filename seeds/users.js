@@ -1,5 +1,5 @@
 const { faker } = require('@faker-js/faker');
-const User = require("#app/users/User.model");
+const User = require('#app/users/User.model');
 
 const createRandomUser = async () => {
   let userAttrs = {
@@ -10,6 +10,6 @@ const createRandomUser = async () => {
   };
 
   return await User.create(userAttrs);
-}
+};
 
 faker.helpers.multiple(createRandomUser, { count: 50 });

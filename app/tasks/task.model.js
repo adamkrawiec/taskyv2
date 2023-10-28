@@ -1,9 +1,9 @@
-const { Sequelize, DataTypes, Op } = require('sequelize');
-const { sequelize } = require("#db");
-const User = require("#app/users/user.model");
-const Item = require("#app/items/item.model");
+const { DataTypes, Op } = require('sequelize');
+const { sequelize } = require('#db');
+const User = require('#app/users/user.model');
+const Item = require('#app/items/item.model');
 
-const Task = sequelize.define("task", {
+const Task = sequelize.define('task', {
   id: {
     type: DataTypes.INTEGER,
     autoIncrement: true,
@@ -15,7 +15,7 @@ const Task = sequelize.define("task", {
   deadlineAt: {
     type: DataTypes.DATE
   },
-})
+});
 
 Task.belongsTo(User);
 User.hasMany(Task, { foreignKey: 'userId' });

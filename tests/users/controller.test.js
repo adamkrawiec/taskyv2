@@ -8,8 +8,8 @@ const {
 } = require('#test_setup');
 
 describe('User Endpoints', () => {
-  let user
-  let response
+  let user;
+  let response;
 
   beforeAll(async () => {
     await connectDB();
@@ -85,13 +85,13 @@ describe('User Endpoints', () => {
   describe('POST /users', () => {
     beforeAll(async() => {
       response = await requestApp.post('/users').send({
-        fullName: "Post Users test",
-        email: "put@example.com"
+        fullName: 'Post Users test',
+        email: 'put@example.com'
       });
     });
 
     it('response returns status 200', () => {
-      expect(response.status).toEqual(200)
+      expect(response.status).toEqual(200);
     });
 
     it('response returns created user data', () => {
@@ -101,7 +101,7 @@ describe('User Endpoints', () => {
           fullName: 'Post Users test',
           email: 'put@example.com',
         }
-      )
+      );
     });
   });
 
@@ -127,7 +127,7 @@ describe('User Endpoints', () => {
       response = await requestApp.delete(`/users/${user.id}`);
     });
 
-    it("response returns status 204", () =>
+    it('response returns status 204', () =>
       expect(response.status).toEqual(204)
     );
 

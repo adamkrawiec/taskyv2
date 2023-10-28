@@ -1,5 +1,5 @@
-const Task = require("#app/tasks/task.model");
-const { sequelize } = require("#db");
+const Task = require('#app/tasks/task.model');
+const { sequelize } = require('#db');
 
 
 const countCompletedTasksSql = `(
@@ -45,7 +45,7 @@ const getItemTasksSummary = async (itemId) => {
     completed: summary.dataValues.countComopleted,
     overdue: summary.dataValues.countOverdue,
     all: summary.dataValues.countAll
-  }
-}
+  };
+};
 
-module.exports = { getItemTasksSummary }
+module.exports = { getItemTasksSummary };
