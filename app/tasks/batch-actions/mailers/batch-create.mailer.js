@@ -1,6 +1,6 @@
 const { mailDefaultOptions, transporter } = require('#config/mail.config');
 
-const batchTasksCreateConfirm = async (user, tasks) => {
+const confirmTasksCreated = async (user) => {
   const mailOptions = {
     from: mailDefaultOptions.from,
     to: user.email,

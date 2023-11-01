@@ -49,3 +49,6 @@
 - [ ] insights module (user with most overdue, items with most overdue, items most completed, items with highest count of tasks)
 - [x] service to create task and send email
 - [x] linter & gh action
+- [ ] email when task created
+- [ ] store who assigned task
+- [ ] web scraper for adding item
