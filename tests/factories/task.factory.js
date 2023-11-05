@@ -1,4 +1,4 @@
-const Task = require('#app/tasks/Task.model');
+const Task = require('#app/tasks/task.model');
 const { faker } = require('@faker-js/faker');
 const { times } = require('lodash');
 const { createItem } = require('./item.factory');
