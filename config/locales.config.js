@@ -8,7 +8,7 @@ i18next.use(Backend).init({
   lng: 'en',
   fallbackLng: 'en',
   saveMissing: true,
-  debug: true,
+  debug: false,
   backend: {
     loadPath: './config/locales/{{lng}}/{{ns}}.json'
   }

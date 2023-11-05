@@ -5,6 +5,4 @@ const sendMailQueue = new Queue('sendMail', {
   redis: redisConfig
 });
 
-module.exports = {
-  sendMailQueue,
-};
+module.exports = sendMailQueue;

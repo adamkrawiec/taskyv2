@@ -5,6 +5,4 @@ const tasksQueue = new Queue('tasks', {
   redis: redisConfig
 });
 
-module.exports = {
-  tasksQueue
-};
+module.exports = tasksQueue;

@@ -5,6 +5,12 @@
         "title": "New Task Assigned",
         "header": "Task Assigned",
         "task_assigned": "You were assigned a new task {{ title }} to be completed by {{ deadline }}"
+      },
+      "batch-actions": {
+        "create": {
+          "title": "New Tasks assigned",
+          "header": "You have successfully assigned {{ count }} tasks"
+        }
       }
     }
   },

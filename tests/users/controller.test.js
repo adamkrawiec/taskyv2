@@ -3,7 +3,6 @@ const User = require('#app/users/user.model');
 const {
   connectDB,
   disconnectDB,
-  disconnectWorkers,
   requestApp,
 } = require('#test_setup');
 
@@ -26,7 +25,6 @@ describe('User Endpoints', () => {
 
   afterAll(async () => {
     await disconnectDB();
-    await disconnectWorkers();
   });
 
   describe('GET /users', () =>{

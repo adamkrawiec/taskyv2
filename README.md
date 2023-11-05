@@ -33,7 +33,7 @@
 - [x] use scopes
 - [x] some pagination
 - [x] migrations
-- [ ] batch action assign task (+ background processing)
+- [x] batch action assign task (+ background processing)
 - [ ] reporting
 - [ ] quizzes
 - [ ] collections/learning lists
@@ -47,5 +47,5 @@
 - [ ] install dayJS and use it
 - [ ] if decided that approach with *.paths.j files, with constants/methods make sense - continue. Otherwise - drop
 - [ ] insights module (user with most overdue, items with most overdue, items most completed, items with highest count of tasks)
-- [ ] service to create task and send email
+- [x] service to create task and send email
 - [x] linter & gh action
