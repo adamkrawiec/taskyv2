@@ -1,9 +1,8 @@
-const Task = require('./task.model');
-// const TaskMailerQueue = require('./task.mailer.queue');
+const Task = require('../task.model');
 
 const completeTask = async(taskId) => {
   const task = await Task.findByPk(taskId);
-  await task.update({completedAt: Date.now() });
+  return await task.update({completedAt: Date.now() });
 };
 
 module.exports = {

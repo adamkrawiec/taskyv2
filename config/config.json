@@ -12,7 +12,8 @@
     "password": "postgresadmin",
     "database": "tasky_test",
     "host": "localhost",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false
   },
   "production": {
     "username": "postgres",

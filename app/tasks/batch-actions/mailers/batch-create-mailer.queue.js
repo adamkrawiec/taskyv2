@@ -1,4 +1,4 @@
-const { sendMailQueue } = require('#queues/mail_queue');
+const sendMailQueue = require('#queues/mail_queue');
 const BatchCreateMailer = require('./batch-create.mailer');
 
 sendMailQueue.process('task-batch-create-mailer', async (job, done) => {

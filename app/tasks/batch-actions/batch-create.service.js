@@ -1,6 +1,6 @@
 const User = require('#app/users/user.model');
 const BatchCreateMailer = require('./mailers/batch-create-mailer.queue');
-const { createTask } = require('../create-task.service');
+const { createTask } = require('../services/create-task.service');
 
 const batchCreateTasks = async ({ userIds, itemId, deadlineAt, currentUser }) => {
   let users = await User.findAll({ where: { id: userIds }});

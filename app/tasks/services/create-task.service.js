@@ -1,6 +1,6 @@
-const Task = require('./task.model');
 const User = require('#app/users/user.model');
-const TaskMailerQueue = require('./task.mailer.queue');
+const Task = require('../task.model');
+const TaskMailerQueue = require('../task.mailer.queue');
 
 const createTask = async({ userId, itemId, deadlineAt }) => {
   const taskParams = {

@@ -3,7 +3,7 @@ const User = require('#app/users/user.model');
 const Item = require('#app/items/item.model');
 const taskDTO = require('./task.dto');
 const TaskRepository = require('./task.repository');
-const { createTask } = require('.services/create-task.service');
+const { createTask } = require('./services/create-task.service');
 const { completeTask } = require('./services/complete-task.service');
 
 const index = async (req, res) => {

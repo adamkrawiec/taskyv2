@@ -26,6 +26,6 @@ plugins:
 
 overrides:
 - files:
-  - "**/*.test.js"
+  - "tests/**/*.js"
   env:
     jest: true
