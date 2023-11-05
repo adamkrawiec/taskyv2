@@ -14,5 +14,5 @@ const confirmTasksCreated = async (user) => {
 };
 
 module.exports = {
-  batchTasksCreateConfirm,
+  confirmTasksCreated,
 };

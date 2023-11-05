@@ -1,5 +1,5 @@
 const User = require('#app/users/user.model');
-const { ConfirmMailerQueue } = require('./mailers/confirm-mailer.queue');
+const ConfirmMailerQueue = require('./mailers/confirm-mailer.queue');
 const { createTask } = require('../services/create-task.service');
 
 const batchCreateTasks = async ({ userIds, itemId, deadlineAt, currentUser }) => {

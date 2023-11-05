@@ -1,9 +1,8 @@
-jest.mock('#queues/mail_queue', () => ({
+const mockQueue = () => ({
   process: jest.fn(),
   add: jest.fn()
-}));
+});
 
-jest.mock('#queues/tasks-queue', () => ({
-  process: jest.fn(),
-  add: jest.fn()
-}));
+queueNames = ['#queues/mail_queue', '#queues/tasks-queue','#queues/web-scrape.queue'];
+
+queueNames.map((queueName) => jest.mock(queueName, () => mockQueue));
