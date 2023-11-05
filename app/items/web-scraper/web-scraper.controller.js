@@ -1,4 +1,4 @@
-const { webScrapeQueue } = require("./web-scrape.queue");
+const webScrapeQueue = require("./web-scrape.queue");
 
 const scrapeUrls = async (req, res) => {
   if(req.body.urls) {

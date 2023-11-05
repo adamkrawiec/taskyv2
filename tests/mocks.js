@@ -5,4 +5,4 @@ const mockQueue = () => ({
 
 queueNames = ['#queues/mail_queue', '#queues/tasks-queue','#queues/web-scrape.queue'];
 
-queueNames.map((queueName) => jest.mock(queueName, () => mockQueue));
+queueNames.map((queueName) => jest.mock(queueName, mockQueue));

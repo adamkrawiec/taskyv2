@@ -1,4 +1,4 @@
-const { webScrapeQueue } = require("#queues/web-scrape.queue");
+const webScrapeQueue = require("#queues/web-scrape.queue");
 const CreateItemService = require("./create-item.service");
 
 webScrapeQueue.process(async (job, done) => {
@@ -6,4 +6,4 @@ webScrapeQueue.process(async (job, done) => {
   done();
 });
 
-module.exports = { webScrapeQueue };
+module.exports = webScrapeQueue;

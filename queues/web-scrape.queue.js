@@ -5,6 +5,4 @@ const webScrapeQueue = new Queue('web-scrape', {
   redis: redisConfig
 });
 
-module.exports = {
-  webScrapeQueue
-};
+module.exports = webScrapeQueue;
