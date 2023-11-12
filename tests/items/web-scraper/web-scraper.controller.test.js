@@ -1,4 +1,3 @@
-const Item = require('#app/items/item.model');
 const WebScrapeQueue = require('#queues/web-scrape.queue');
 
 const {
@@ -8,6 +7,7 @@ const {
 } = require('#test_setup');
 
 describe('WebScraperController', () => {
+  let response;
   beforeAll(async () => {
     await connectDB();
   });

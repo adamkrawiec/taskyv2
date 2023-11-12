@@ -7,5 +7,9 @@ const batchCreateTasks = async ({ userIds, itemId, deadlineAt, currentUser }) =>
 
   let tasks = await users.map(async (user) =>
     await createTask({ userId: user.id, itemId, deadlineAt }));
-  await ConfirmMailerQueue.add({ user: currentUser });
+  await ConfirmMailerQueue.add({ user: currentUser, tasks });
+};
+
+module.exports = {
+  batchCreateTasks
 };

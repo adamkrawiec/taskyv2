@@ -1,6 +1,5 @@
-const Item = require('#app/items/item.model');
 const { createUser } = require('../../factories/user.factory');
-const CreateItemService = require("#app/items/web-scraper/create-item.service");
+const CreateItemService = require('#app/items/web-scraper/create-item.service');
 const {
   connectDB,
   disconnectDB,
@@ -18,16 +17,16 @@ describe('CreateItemService', () => {
   let user = createUser();
 
   it('adds a new item, with content scraped from the page', async() => {
-    let url = "www.example.com"
+    let url = 'www.example.com';
 
     let item = await CreateItemService.addItemFromUrl({ url, currentUser: user });
     expect(item.title).toEqual('Scraped title from url: www.example.com');
   });
 
   it('saves the item to databas', async() => {
-    let url = "www.example.com"
+    let url = 'www.example.com';
 
     let item = await CreateItemService.addItemFromUrl({ url, currentUser: user });
     expect(item.id).not.toBeNull();
   });
-})
+});
