@@ -16,7 +16,7 @@ async function ensureDB() {
     await client.query(`CREATE DATABASE "${dbConfig.NAME}"`);
     console.log('DB is successfully created');
   } catch (err) {
-    console.log(err.stack);
+    // console.log(err.stack);
   } finally {
     client.end();
   }
@@ -32,6 +32,7 @@ function initDB() {
       host: dbConfig.HOST,
       dialect: dbConfig.dialect,
       operatorsAliases: false,
+      logging: dbConfig.logging,
       pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,

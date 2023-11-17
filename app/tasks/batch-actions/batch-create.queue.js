@@ -6,4 +6,4 @@ tasksQueue.process(async (job, done) => {
   done();
 });
 
-module.exports = { createTasksQueue: tasksQueue };
+module.exports = tasksQueue;
