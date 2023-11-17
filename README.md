@@ -52,4 +52,4 @@
 - [x] email when task created
 - [ ] store who assigned task
 - [x] web scraper for adding item
-- [ ] fix email when task created
+- [x] fix email when task created

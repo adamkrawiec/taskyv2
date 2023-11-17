@@ -1,5 +1,5 @@
-const { createItem } = require("../../factories/item.factory");
-const { createUser } = require("../../factories/user.factory");
+const { createItem } = require('../../factories/item.factory');
+const { createUser } = require('../../factories/user.factory');
 const { faker } = require('@faker-js/faker');
 const batchCreateTasks = require('#app/tasks/batch-actions/batch-create.service');
 const sendMailQueue = require('#queues/mail_queue');
