@@ -1,4 +1,4 @@
-const { createTasksQueue } = require('./batch-create.queue');
+const createTasksQueue = require('./batch-create.queue');
 
 const batchAssign = async (req, res) => {
   const userIds = req.body.user_ids;
