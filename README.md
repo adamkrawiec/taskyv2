@@ -53,3 +53,6 @@
 - [ ] store who assigned task
 - [x] web scraper for adding item
 - [x] fix email when task created
+- [ ] move user's task log to users/user-tasks from tasks
+- [ ] add tests for item-task-summary
+- [ ] fix: currently specs check strings, should be numbers - tests/items/item-tasks/item-task-summary.test.js

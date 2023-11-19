@@ -11,7 +11,7 @@ const countCompletedTasksSql = `(
 const countOverdueTasksSql = `(
   SELECT COUNT(*)
   FROM tasks AS t
-  WHERE "t"."deadlineAt" > NOW() and "t"."completedAt" is null and "t"."itemId" = "task"."itemId"
+  WHERE "t"."deadlineAt" < NOW() and "t"."completedAt" is null and "t"."itemId" = "task"."itemId"
 )`;
 
 const countAllTasksSql = `(

@@ -1,21 +1,29 @@
 const Task = require('#app/tasks/task.model');
 const { faker } = require('@faker-js/faker');
-const { times } = require('lodash');
 const { createItem } = require('./item.factory');
+const { createUser } = require('./user.factory');
 
-const createTask = async ({ user }) => {
-  let item = await createItem();
+const createTask = async ({ user, item, overdue = false, completed = false } = {}) => {
+  if(!item) item = await createItem();
+  if(!user) user = await createUser();
+
   let taskAttrs = {
     userId: user.id,
     itemId: item.id,
-    deadlineAt: faker.date.soon({ days: 5 })
+    deadlineAt: overdue ? faker.date.past({ days: 5 }) : faker.date.soon({ days: 5 }),
+    completedAt: completed ? faker.date.recent({ days: 1 }) : null
   };
 
-  return await Task.create(taskAttrs);
+  let task = await Task.create(taskAttrs);
+  return task
 };
 
-const createList = (count) => {
-  return times(count, async() => { await createTask(); });
+const createList = async (count, attrs = {}) => {
+  let tasks = [];
+  for(let i = 0; i < count; i++) {
+    tasks.push(await createTask(attrs));
+  }
+  return tasks
 };
 
 module.exports = {

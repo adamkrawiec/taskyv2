@@ -59,7 +59,8 @@
     "#db": "./db.js",
     "#config/*": "./config/*.js",
     "#test_setup": "./tests/setup.js",
-    "#tests": "./tests/*.js"
+    "#factories/*": "./tests/factories/*.js",
+    "#mocks": "./tests/mocks.js"
   },
   "jest": {
     "testEnvironment": "node",
