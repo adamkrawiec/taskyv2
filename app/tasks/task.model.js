@@ -17,10 +17,10 @@ const Task = sequelize.define('task', {
   },
 });
 
-Task.belongsTo(User);
+Task.User = Task.belongsTo(User);
 User.hasMany(Task, { foreignKey: 'userId' });
 
-Task.belongsTo(Item, { foreignKey: 'itemId' });
+Task.Item = Task.belongsTo(Item, { foreignKey: 'itemId' });
 Item.hasMany(Task, { foreignKey: 'itemId' });
 
 

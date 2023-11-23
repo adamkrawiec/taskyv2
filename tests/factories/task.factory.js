@@ -14,7 +14,7 @@ const createTask = async ({ user, item, overdue = false, completed = false } = {
     completedAt: completed ? faker.date.recent({ days: 1 }) : null
   };
 
-  let task = await Task.create(taskAttrs);
+  let task = await Task.create(taskAttrs, { include: [Task.User, Task.Item] });
   return task
 };
 
