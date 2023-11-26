@@ -30,7 +30,7 @@ describe('TaskRepository', () => {
   });
 
   describe('findTasks', () => {
-    it('it returns all tasks by default', async () => {
+    it('returns all tasks by default', async () => {
       let tasks = await TaskRepository.findTasks({ query: {} }, {});
       let taskIds = tasks.map((t) => t.id);
       let allTaskIds = [task,
@@ -42,7 +42,7 @@ describe('TaskRepository', () => {
       expect(taskIds).toEqual(expect.arrayContaining(allTaskIds));
     });
 
-    it('it returns tasks assigned to the item provided', async () => {
+    it('returns tasks assigned to the item provided', async () => {
       let tasks = await TaskRepository.findTasks({ query: { item_id: item.id }}, {});
       let taskIds = tasks.map((t) => t.id);
 
@@ -50,7 +50,7 @@ describe('TaskRepository', () => {
       expect(taskIds).not.toContain(taskCompleted.id);
     });
 
-    it('it returns tasks assigned to the user provided', async () => {
+    it('returns tasks assigned to the user provided', async () => {
       let tasks = await TaskRepository.findTasks({ query: { user_id: user.id }}, {});
       let taskIds = tasks.map((t) => t.id);
 
@@ -58,7 +58,7 @@ describe('TaskRepository', () => {
       expect(taskIds).not.toContain(taskCompleted.id);
     });
 
-    it('it returns completed tasks', async () => {
+    it('returns completed tasks', async () => {
       let tasks = await TaskRepository.findTasks({ query: { completed: true }}, {});
       let taskIds = tasks.map((t) => t.id);
 
@@ -66,7 +66,7 @@ describe('TaskRepository', () => {
       expect(taskIds).not.toContain(taskOverdue.id);
     });
 
-    it('it returns tasks with deadline before date', async () => {
+    it('returns tasks with deadline before date', async () => {
       let tasks = await TaskRepository.findTasks({
         query: {
           deadline_before: faker.date.recent({ days: 1, refDate: task.deadlineAt })
@@ -78,7 +78,7 @@ describe('TaskRepository', () => {
       expect(taskIds).not.toContain(task.id);
     });
 
-    it('it returns tasks with deadline after date', async () => {
+    it('returns tasks with deadline after date', async () => {
       let tasks = await TaskRepository.findTasks({
         query: {
           deadline_after: faker.date.soon({ days: 1, refDate: taskOverdue.deadlineAt })
@@ -90,7 +90,7 @@ describe('TaskRepository', () => {
       expect(taskIds).toContain(task.id);
     });
 
-    it('it returns tasks with deadline between dates', async () => {
+    it('returns tasks with deadline between dates', async () => {
       let taskInRange = await createTask({ deadlineAt: new Date('10/12/2023') });
 
       let tasks = await TaskRepository.findTasks({
@@ -105,6 +105,13 @@ describe('TaskRepository', () => {
       expect(taskIds).not.toContain(taskOverdue.id);
       expect(taskIds).not.toContain(task.id);
       expect(taskIds).toContain(taskInRange.id);
+    });
+  });
+
+  describe('countTasks', () => {
+    it('returns count of tasks matching criteria', async() => {
+      const count = await TaskRepository.countTasks();
+      expect(count).toEqual(6);
     });
   });
 });
