@@ -6,7 +6,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development node server.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
-    "console": "cross-env NODE_ENV=development node"
+    "console": "cross-env NODE_ENV=development node",
+    "lint": "npx eslint . --fix"
   },
   "repository": {
     "type": "git",

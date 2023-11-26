@@ -23,7 +23,7 @@ const findTasks = async (req, { includes = [] } = {}) => {
 
   return await Task.findAll({
     where: conditions,
-    include: [],
+    include: includes,
     limit: perPage,
     offset,
   });
