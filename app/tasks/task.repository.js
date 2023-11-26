@@ -2,33 +2,47 @@ const { Op } = require('sequelize');
 
 const Task = require('./task.model');
 
-const findTask = async(id) => await Task.findByPk(id);
 
-const findTasks = async (req, { includes = [] } = {}) => {
-  const perPage = 20;
-  const offset = req.query.page ? (req.query.page - 1) * perPage : 0;
+const buildConditions = (query) => {
   let conditions = {};
 
-  if(req.query.completed) conditions['completedAt'] = { [Op.not]: null };
-  if(req.query.user_id) conditions['userId'] = parseInt(req.query.user_id);
-  if(req.query.item_id) conditions['itemId'] = parseInt(req.query.item_id);
+  if(query.completed) conditions['completedAt'] = { [Op.not]: null };
+  if(query.user_id) conditions['userId'] = parseInt(query.user_id);
+  if(query.item_id) conditions['itemId'] = parseInt(query.item_id);
 
   let deadlineConditions = {};
-  if(req.query.deadline_before) deadlineConditions[Op.lte] = req.query.deadline_before;
-  if(req.query.deadline_after) deadlineConditions[Op.gte] = req.query.deadline_after;
+  if(query.deadline_before) deadlineConditions[Op.lte] = query.deadline_before;
+  if(query.deadline_after) deadlineConditions[Op.gte] = query.deadline_after;
 
-  if(req.query.deadline_before || req.query.deadline_after) {
+  if(query.deadline_before || query.deadline_after) {
     conditions['deadlineAt'] = deadlineConditions;
   }
+  return conditions;
+};
+
+const findTask = async(id) => await Task.findByPk(id);
+
+const findTasks = async ({ query } = {}, { includes = [], attributes } = {}) => {
+  const perPage = query.perPage ? query.perPage : null;
+  const offset = query.page ? (query.page - 1) * perPage : 0;
 
   return await Task.findAll({
-    where: conditions,
+    where: buildConditions(query),
     include: includes,
     limit: perPage,
+    attributes: attributes,
     offset,
+  });
+};
+
+const countTasks = async({ query = {}, attributes, group } = {}) => {
+  return await Task.count({
+    where: buildConditions(query),
+    attributes,
+    group
   });
 };
 
 
 
-module.exports = { findTask, findTasks };
+module.exports = { findTask, findTasks, countTasks };
