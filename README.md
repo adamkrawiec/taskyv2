@@ -57,3 +57,11 @@
 - [x] add tests for item-task-summary
 - [x] fix: currently specs check strings, should be numbers - tests/items/item-tasks/item-task-summary.test.js
 - [x] item-task-summary to have deadlineFrom...deadlineTo filter
+- [ ] change tasksController#summary to use new summary for tasks object
+- [ ] add helmet.js
+- [ ] add streetsidesoftare/cspell-action@v2
+- [ ] add joi and use for whitelisted params
+- [ ] experiment with child threads: https://alvinlal.netlify.app/blog/single-thread-vs-child-process-vs-worker-threads-vs-cluster-in-nodejs
+- [ ] change to winston.js for logging
+- [ ] learn more with roadmap.sh/nodejs
+- [ ] add action for spell check
