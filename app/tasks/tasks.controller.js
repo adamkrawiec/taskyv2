@@ -11,7 +11,7 @@ const index = async (req, res) => {
   if(!req.query.perPage) req.query.perPage = 20;
 
   let tasks = await TaskRepository.findTasks(req);
-  tasks = tasks.map((task) => taskDTO(task));
+  tasks = tasks.map((task) => taskDTO(task, req.currentUser));
 
   const title = req.t('tasks.index.title');
   res.json({ title, data: tasks });
@@ -20,7 +20,7 @@ const index = async (req, res) => {
 const showById = async (req, res) => {
   try {
     const task = await Task.findByPk(req.params.id, { include: [User, Item] });
-    const taskdto = taskDTO(task);
+    const taskdto = taskDTO(task, req.currentUser);
 
     res.json({ data: taskdto });
   }
@@ -34,7 +34,7 @@ const showByUserId = async (req, res) => {
   const user = await User.findByPk(req.params.userId);
 
   let tasks = await user.getTasks({ include: User });
-  tasks = tasks.map((task) => taskDTO(task));
+  tasks = tasks.map((task) => taskDTO(task, req.currentUser));
   const title = req.t('tasks.user.title', { userName: user.fullName });
 
   res.json({ title, data: tasks });
@@ -42,7 +42,7 @@ const showByUserId = async (req, res) => {
 
 const myTasks = async(req, res) => {
   let tasks = await req.currentUser.getTasks({ include: User });
-  tasks = tasks.map((task) => taskDTO(task));
+  tasks = tasks.map((task) => taskDTO(task, req.currentUser));
   const title = req.t('tasks.my.title');
 
   res.json({ title, data: tasks });
@@ -51,7 +51,7 @@ const myTasks = async(req, res) => {
 const create = async (req, res) => {
   try {
     const task = await createTask(permitTaskParams(req));
-    res.json(taskDTO(task));
+    res.json(taskDTO(task, req.currentUser));
   } catch(errors) {
     res.status(422).json({ errors });
   }

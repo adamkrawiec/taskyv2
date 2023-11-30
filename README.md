@@ -64,4 +64,4 @@
 - [ ] experiment with child threads: https://alvinlal.netlify.app/blog/single-thread-vs-child-process-vs-worker-threads-vs-cluster-in-nodejs
 - [x] change to winston.js for logging
 - [ ] learn more with roadmap.sh/nodejs
-- [ ]
+- [x] append user fullname with `(me)` if it is current user

@@ -5,7 +5,7 @@ const User = require('#app/users/user.model');
 const index = async (req, res) => {
   const items = await Item.findAll({ include: User });
 
-  const itemData = items.map((item) => itemDTO(item));
+  const itemData = items.map((item) => itemDTO(item, req.currentUser));
   res.json( { items: itemData });
 };
 
@@ -21,7 +21,7 @@ const create = async(req, res) => {
 const show = async(req, res) => {
   const item = await findItem(req.params.id, { include: [User]});
 
-  res.json({ item: itemDTO(item) });
+  res.json({ item: itemDTO(item. req.currentUser) });
 };
 
 const update = async(req, res) => {

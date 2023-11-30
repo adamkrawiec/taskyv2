@@ -8,7 +8,7 @@ const countCompletedTasksSql = `
   FROM "tasks"
   WHERE "tasks"."userId" = "user"."id" AND "tasks"."completedAt" is not null)`;
 
-const getUsersByMostCompletedTasks = async() => {
+const getUsersByMostCompletedTasks = async({ currentUser = null} = {}) => {
   const users = await User.findAll({
     attributes: { include: [[sequelize.literal(countCompletedTasksSql),
       'completed_tasks_count']] },
@@ -16,7 +16,7 @@ const getUsersByMostCompletedTasks = async() => {
     limit: 10
   });
 
-  return users.map((user) => UserLeaderboardDTO(user));
+  return users.map((user) => UserLeaderboardDTO(user, currentUser));
 };
 
 module.exports = {
