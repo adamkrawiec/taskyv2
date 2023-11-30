@@ -33,6 +33,7 @@ function initDB() {
       dialect: dbConfig.dialect,
       operatorsAliases: false,
       logging: dbConfig.logging,
+      benchmark: dbConfig.benchmark,
       pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,

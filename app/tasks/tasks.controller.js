@@ -5,8 +5,11 @@ const taskDTO = require('./task.dto');
 const TaskRepository = require('./task.repository');
 const { createTask } = require('./services/create-task.service');
 const { completeTask } = require('./services/complete-task.service');
+const { getSummary } = require("./services/task-summary.service");
 
 const index = async (req, res) => {
+  if(!req.query.perPage) req.query.perPage = 20;
+
   let tasks = await TaskRepository.findTasks(req);
   tasks = tasks.map((task) => taskDTO(task));
 
@@ -56,6 +59,7 @@ const create = async (req, res) => {
 
 const complete = async(req, res) => {
   await completeTask(req.params.id);
+
   res.status(204).send('ok');
 };
 
@@ -78,11 +82,9 @@ const destroy = async(req, res) => {
 };
 
 const summary = async(req, res) => {
-  const total = await Task.count();
-  const completed = await Task.scope('completed').count();
-  const overdue = await Task.scope('overdue').count();
+  const summary = await getSummary(req);
 
-  res.json({ total, completed, overdue });
+  res.json(summary);
 };
 
 const permitTaskParams = (req) => ({
