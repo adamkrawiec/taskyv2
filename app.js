@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
-const helmet = require("helmet");
+const helmet = require('helmet');
 const winston = require('winston');
 const expressWinston = require('express-winston');
 
@@ -35,7 +35,7 @@ app.use(expressWinston.logger({
   transports: [new winston.transports.Console()],
   expressFormat: true,
   colorize: false,
-}))
+}));
 
 app.use(setCurrentUser);
 

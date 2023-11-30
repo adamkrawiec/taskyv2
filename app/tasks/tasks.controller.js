@@ -5,7 +5,7 @@ const taskDTO = require('./task.dto');
 const TaskRepository = require('./task.repository');
 const { createTask } = require('./services/create-task.service');
 const { completeTask } = require('./services/complete-task.service');
-const { getSummary } = require("./services/task-summary.service");
+const { getSummary } = require('./services/task-summary.service');
 
 const index = async (req, res) => {
   if(!req.query.perPage) req.query.perPage = 20;
