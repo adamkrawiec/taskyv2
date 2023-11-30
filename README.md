@@ -3,10 +3,10 @@
 - [x] basic NodeJS app
 - [x] with a Docker image
 - [x] github action to build image on AWS
-- [ ] environment set on AWS
+- [x] environment set on AWS
 - [x] deployed and built on AWS
 - [x] communicate with DB
-- [ ] configure deploy with DB to AWS
+- [x] configure deploy with DB to AWS
 - [x] task model and relation to user
 - [ ] auth
 - [x] middleware and store userID in cookies
@@ -20,14 +20,14 @@
 - [x] nodemailer to work with bull.js - send emails in queues
 - [x] internationalization
 - [x] some basic queries
-- [ ] refactor to task repository
+- [x] refactor to task repository
 - [x] marking tasks as complete
 - [x] tests setup & gh action for tests
-- [ ] some tests actually written
+- [x] some tests actually written
 - [ ] Activity model
 - [ ] Item model
-- [ ] Item Task relation
-- [ ] Item DPO and Controlle
+- [x] Item Task relation
+- [x] Item DPO and Controller
 - [x] missing task CRUD interface
 - [x] add links to task DTO
 - [x] use scopes
@@ -57,3 +57,11 @@
 - [x] add tests for item-task-summary
 - [x] fix: currently specs check strings, should be numbers - tests/items/item-tasks/item-task-summary.test.js
 - [x] item-task-summary to have deadlineFrom...deadlineTo filter
+- [x] change tasksController#summary to use new summary for tasks object
+- [x] add helmet.js
+- [ ] add streetsidesoftare/cspell-action@v2 (add action for spell check)
+- [ ] add joi and use for whitelisted params
+- [ ] experiment with child threads: https://alvinlal.netlify.app/blog/single-thread-vs-child-process-vs-worker-threads-vs-cluster-in-nodejs
+- [x] change to winston.js for logging
+- [ ] learn more with roadmap.sh/nodejs
+- [ ]
