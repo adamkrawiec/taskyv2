@@ -9,7 +9,7 @@ const taskDTO = (task, currentUser) => {
     deadlineAt: task.deadlineAt,
 
     user: task.user && userDTO(task.user, currentUser),
-    item: task.item && itemDTO(task.item. currentUser),
+    item: task.item && itemDTO(task.item, currentUser),
 
     _links: {
       self: `/tasks/${task.id}`,

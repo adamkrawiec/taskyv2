@@ -65,3 +65,5 @@
 - [x] change to winston.js for logging
 - [ ] learn more with roadmap.sh/nodejs
 - [x] append user fullname with `(me)` if it is current user
+- [ ] DTO objects to format dates in a nice way
+- [ ] Notification model

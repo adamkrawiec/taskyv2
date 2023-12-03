@@ -30,16 +30,6 @@ const showById = async (req, res) => {
   }
 };
 
-const showByUserId = async (req, res) => {
-  const user = await User.findByPk(req.params.userId);
-
-  let tasks = await user.getTasks({ include: User });
-  tasks = tasks.map((task) => taskDTO(task, req.currentUser));
-  const title = req.t('tasks.user.title', { userName: user.fullName });
-
-  res.json({ title, data: tasks });
-};
-
 const myTasks = async(req, res) => {
   let tasks = await req.currentUser.getTasks({ include: User });
   tasks = tasks.map((task) => taskDTO(task, req.currentUser));
@@ -98,7 +88,6 @@ module.exports = {
   create,
   index,
   showById,
-  showByUserId,
   myTasks,
   complete,
   update,
