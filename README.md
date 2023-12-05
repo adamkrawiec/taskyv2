@@ -67,3 +67,4 @@
 - [x] append user fullname with `(me)` if it is current user
 - [ ] DTO objects to format dates in a nice way
 - [ ] Notification model
+- [ ] Team model and Team Member
