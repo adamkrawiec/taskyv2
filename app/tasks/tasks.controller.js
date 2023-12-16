@@ -39,11 +39,12 @@ const myTasks = async(req, res) => {
 };
 
 const create = async (req, res) => {
-  try {
-    const task = await createTask(permitTaskParams(req));
+  const { task, error }  = await createTask(req.body);
+
+  if(task) {
     res.json(taskDTO(task, req.currentUser));
-  } catch(errors) {
-    res.status(422).json({ errors });
+  } else {
+    res.status(422).json({ errors: error.details });
   }
 };
 

@@ -1,9 +1,9 @@
 const Joi = require('joi')
 
 const TaskSchema = Joi.object({
-  userId: Joi.number(),
-  itemId: Joi.number(),
-  deadlineAt: Joi.date().greater(new Date())
+  userId: Joi.number().required(),
+  itemId: Joi.number().required(),
+  deadlineAt: Joi.date().greater(new Date()).required()
 })
 
 module.exports = TaskSchema;
