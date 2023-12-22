@@ -5,6 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "cross-env NODE_ENV=development node server.js",
+    "debug": "NODE_ENV=development node --inspect-brk server.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
     "console": "cross-env NODE_ENV=development node",
     "lint": "npx eslint . --fix"
