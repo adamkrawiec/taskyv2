@@ -15,6 +15,7 @@ const { TASKS_ROOT_PATH } = require('#app/tasks/tasks.paths');
 const userRouter = require('#app/users/user.router');
 const taskRouter = require('#app/tasks/task.router');
 const itemRouter = require('#app/items/item.router');
+const activityRouter = require('#app/activities/activity.router');
 
 const homeController = require('#app/home.controller');
 
@@ -43,5 +44,6 @@ app.use('/', homeController);
 app.use(USERS_ROOT_PATH, userRouter);
 app.use(TASKS_ROOT_PATH, taskRouter);
 app.use('/items', itemRouter);
+app.use('/activities', activityRouter);
 
 module.exports = app;
