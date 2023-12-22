@@ -11,8 +11,6 @@ const createActivity = async ({ user, item, verb } = {}) => {
     verb: verb || 'viewed',
   };
 
-  console.log(activityAttrs);
-
   return await Activity.create(activityAttrs);
 };
 
