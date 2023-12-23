@@ -20,7 +20,7 @@ const create = async(req, res) => {
   }
 
   try {
-    const activity = await Activity.create(activityParams});
+    const activity = await Activity.create(activityParams);
     activity.user = await activity.getUser();
     activity.item = await activity.getItem();
 
