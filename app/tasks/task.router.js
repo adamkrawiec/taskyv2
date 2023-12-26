@@ -13,7 +13,10 @@ router.route('/').
 
 router.get(MY_TASKS_PATH, tasksController.myTasks);
 router.get(SUMMARY_TASKS_PATH, tasksController.summary);
-router.get('/user/:userId', taskUsersController.index);
+
+router.get('/user/:userId', tasksController.showByUserId);
+router.get('/user/:userId/summary', tasksController.showSummaryByUserId);
+
 
 router.route('/:id').get(tasksController.showById)
   .put(tasksController.update)

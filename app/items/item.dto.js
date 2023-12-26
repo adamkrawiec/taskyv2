@@ -6,7 +6,7 @@ const itemDTO = (item, currentUser) => {
     title: item.title,
     body: item.body,
     url: item.url,
-    createdAt: item.createdAt,
+    createdAt: item.createdAt.toDateString(),
 
     author: item.user && userDTO(item.user, currentUser),
 
