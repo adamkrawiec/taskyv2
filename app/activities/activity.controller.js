@@ -17,7 +17,7 @@ const create = async(req, res) => {
     userId: req.body.user_id,
     itemId: req.body.item_id,
     verb: req.body.verb
-  }
+  };
 
   try {
     const activity = await Activity.create(activityParams);
@@ -26,9 +26,9 @@ const create = async(req, res) => {
 
     res.json(activityDTO(activity));
   } catch (err) {
-    res.status(422).json({ err })
+    res.status(422).json({ err });
   }
-}
+};
 
 const userActivities = async(req, res) => {
   const activities = await Activity.findAll({

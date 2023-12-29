@@ -14,15 +14,15 @@ const getSummary = async (req) => {
   let summary = await countTasks({ query: req.query, attributes: [taskStatusAttribute], group: 'status' });
 
   const findDataPointCount = (status) => {
-    let summaryData = summary.find((dp) => dp.status === status)
-    return summaryData && summaryData.count
-  }
+    let summaryData = summary.find((dp) => dp.status === status);
+    return summaryData && summaryData.count;
+  };
 
   return [
-    { status: 'completed', count: findDataPointCount("completed") || 0 },
-    { status: 'open', count: findDataPointCount("open") || 0 },
-    { status: 'overdue', count: findDataPointCount("overdue") || 0 },
-  ]
+    { status: 'completed', count: findDataPointCount('completed') || 0 },
+    { status: 'open', count: findDataPointCount('open') || 0 },
+    { status: 'overdue', count: findDataPointCount('overdue') || 0 },
+  ];
 };
 
 

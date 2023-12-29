@@ -27,19 +27,21 @@ describe('TaskSummary', () => {
     it('returns count of open, completed and overdue tasks', async () => {
       let summary = await TaskSummary.getSummary({ query: {} });
 
-      expect(summary).toEqual(
-        [ { status: 'open', count: 3 },
-          { status: 'completed', count: 1 },
-          { status: 'overdue', count: 1 } ]
-      );
+      expect(summary).toEqual([
+        { status: 'completed', count: 1 },
+        { status: 'open', count: 3 },
+        { status: 'overdue', count: 1 }
+      ]);
     });
 
     it('returns count of open, completed and overdue tasks for item', async () => {
       let summary = await TaskSummary.getSummary({ query: { item_id: item.id } });
 
-      expect(summary).toEqual(
-        [ { status: 'open', count: 1 } ]
-      );
+      expect(summary).toEqual([
+        { status: 'completed', count: 0 },
+        { status: 'open', count: 1 },
+        { status: 'overdue', count: 0 }
+      ]);
     });
 
     it('returns count of open, completed and overdue tasks for user', async () => {

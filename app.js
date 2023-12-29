@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
+const cookieSession = require('cookie-session');
 const helmet = require('helmet');
 const winston = require('winston');
 const expressWinston = require('express-winston');
@@ -22,11 +23,21 @@ const homeController = require('#app/home.controller');
 const app = express();
 
 const corsOptions = {
+  credentials: true,
   origin: ['http://localhost:3000', 'http://localhost:5173']
+};
+
+const cookieSessionOptions = {
+  secret: 'yourSecret',
+  sameSite: 'none',
+  secure: true,
+  httpOnly: true,
 };
 
 app.use(i18nextMiddleware);
 app.use(cookieParser());
+app.use(cookieSession(cookieSessionOptions));
+
 app.use(bodyParser.json());
 app.use(cors(corsOptions));
 app.use(express.json());

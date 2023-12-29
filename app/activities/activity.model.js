@@ -3,7 +3,7 @@ const { sequelize }  = require('#db');
 
 const User = require('#app/users/user.model');
 const Item = require('#app/items/item.model');
-const verbs = require("./verbs");
+const verbs = require('./verbs');
 
 const Activity = sequelize.define('activity', {
   id: {

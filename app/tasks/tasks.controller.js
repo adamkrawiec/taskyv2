@@ -42,11 +42,7 @@ const showByUserId = async (req, res) => {
 };
 
 const showSummaryByUserId = async(req, res) => {
-  const user = await User.findByPk(req.params.userId);
-
-  let tasks = await user.getTasks({ include: User });
   const summary = await getSummary({ query: { ...req.query, user_id: req.params.userId } });
-  console.log(summary)
   res.json(summary);
 };
 
