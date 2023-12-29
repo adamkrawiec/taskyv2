@@ -30,22 +30,6 @@ const showById = async (req, res) => {
   }
 };
 
-
-const showByUserId = async (req, res) => {
-  const user = await User.findByPk(req.params.userId);
-
-  let tasks = await user.getTasks({ include: User });
-  tasks = tasks.map((task) => taskDTO(task));
-  const title = req.t('tasks.user.title', { userName: user.fullName });
-
-  res.json({ title, data: tasks });
-};
-
-const showSummaryByUserId = async(req, res) => {
-  const summary = await getSummary({ query: { ...req.query, user_id: req.params.userId } });
-  res.json(summary);
-};
-
 const myTasks = async(req, res) => {
   let tasks = await req.currentUser.getTasks({ include: User });
   tasks = tasks.map((task) => taskDTO(task, req.currentUser));
@@ -105,8 +89,6 @@ module.exports = {
   create,
   index,
   showById,
-  showByUserId,
-  showSummaryByUserId,
   myTasks,
   complete,
   update,

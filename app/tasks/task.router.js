@@ -14,13 +14,14 @@ router.route('/').
 router.get(MY_TASKS_PATH, tasksController.myTasks);
 router.get(SUMMARY_TASKS_PATH, tasksController.summary);
 
-router.get('/user/:userId', tasksController.showByUserId);
-router.get('/user/:userId/summary', tasksController.showSummaryByUserId);
+router.get('/user/:userId', taskUsersController.index);
+router.get('/user/:userId/summary', taskUsersController.summary);
 
 
-router.route('/:id').get(tasksController.showById)
-  .put(tasksController.update)
-  .delete(tasksController.destroy);
+router.route('/:id').
+  get(tasksController.showById).
+  put(tasksController.update).
+  delete(tasksController.destroy);
 
 router.patch('/:id/complete', tasksController.complete);
 

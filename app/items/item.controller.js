@@ -21,7 +21,7 @@ const create = async(req, res) => {
 const show = async(req, res) => {
   const item = await findItem(req.params.id, { include: [User]});
 
-  res.json({ item: itemDTO(item. req.currentUser) });
+  res.json({ item: itemDTO(item, req.currentUser) });
 };
 
 const update = async(req, res) => {

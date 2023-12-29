@@ -2,6 +2,7 @@ const TaskRepository = require('../task.repository');
 const Task = require('../task.model');
 const taskDTO = require('../task.dto');
 const asyncHandler = require('express-async-handler');
+const { getSummary } = require('../services/task-summary.service');
 
 const index = asyncHandler(async (req, res) => {
   const query = { ...req.query, user_id: req.params.userId };
@@ -13,6 +14,12 @@ const index = asyncHandler(async (req, res) => {
   res.json({ title, data: tasks });
 });
 
+const summary = async(req, res) => {
+  const summary = await getSummary({ query: { ...req.query, user_id: req.params.userId } });
+  res.json(summary);
+};
+
 module.exports = {
   index,
+  summary
 };
