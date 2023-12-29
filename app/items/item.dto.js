@@ -1,6 +1,6 @@
 const { userDTO } = require('#app/users/user.dto');
 
-const itemDTO = (item) => {
+const itemDTO = (item, currentUser) => {
   return {
     id: item.id,
     title: item.title,
@@ -8,7 +8,7 @@ const itemDTO = (item) => {
     url: item.url,
     createdAt: item.createdAt,
 
-    author: item.user && userDTO(item.user),
+    author: item.user && userDTO(item.user, currentUser),
 
     _links: {
       self: `/items/${item.id}`,

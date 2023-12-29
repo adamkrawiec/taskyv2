@@ -34,5 +34,6 @@ const getDeadlineAt = (deadlineAt, overdue) => {
 
 module.exports = {
   createTask,
-  createList
+  createList,
+  createTasks: createList
 };

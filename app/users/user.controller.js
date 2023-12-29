@@ -9,7 +9,7 @@ const create = async (req, res) => {
 
   try {
     const user = await User.create(userParams);
-    res.json(userDTO(user));
+    res.json(userDTO(user, req.currentUser));
   } catch({ errors }) {
     res.status(422).json({ errors });
   }
@@ -17,7 +17,7 @@ const create = async (req, res) => {
 
 const findAll = (req, res) => {
   User.findAll().then((data) => {
-    const users = data.map((user) => userDTO(user));
+    const users = data.map((user) => userDTO(user, req.currentUser));
     const links = {
       leaderboard: '/users/leaderboard'
     };
@@ -28,7 +28,7 @@ const findAll = (req, res) => {
 const findOne = async (req, res) => {
   const user = await User.findByPk(req.params.id);
 
-  if(user) return res.json(fullUserDTO(user));
+  if(user) return res.json(fullUserDTO(user, req.currentUser));
 
   res.status(404).send('not found');
 };
@@ -44,7 +44,7 @@ const updateOne = async (req, res) => {
 
   try {
     await user.update(userParams);
-    res.json(userDTO(user));
+    res.json(userDTO(user, req.currentUser));
   } catch({ errors }) {
     res.status(422).json({ errors });
   }

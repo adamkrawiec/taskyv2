@@ -3,7 +3,7 @@ const { USERS_ROOT_PATH } = require('../users.paths');
 const { TASKS_ROOT_PATH } = require('#app/tasks/tasks.paths');
 
 const getLeaderboard = async (req, res) => {
-  const users = await getUsersByMostCompletedTasks();
+  const users = await getUsersByMostCompletedTasks({ currentUser: req.currentUser });
 
   const links = {
     'tasks-log': TASKS_ROOT_PATH,
