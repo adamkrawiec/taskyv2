@@ -4,30 +4,29 @@ const {
   requestApp,
 } = require('#test_setup');
 
-const { createTask, createTasks } = require("#factories/task.factory");
-const { createUser } = require("#factories/user.factory");
+const { createTask, createTasks } = require('#factories/task.factory');
+const { createUser } = require('#factories/user.factory');
 
-describe("Task endpoints", () => {
+describe('Task endpoints', () => {
   let user;
   let tasks;
   let userTask;
-  let otherUserTask;
+  let response;
 
   beforeAll(async () => {
     await connectDB();
 
     user = await createUser();
     tasks = await createTasks(5);
-    userTask = await createTask({ user })
+    userTask = await createTask({ user });
     await createTask({ user, overdue: true });
-    otherUserTask = await createTask({ user: await createUser() });
   });
 
   afterAll(async () => {
     await disconnectDB();
   });
 
-  describe("GET /tasks", () => {
+  describe('GET /tasks', () => {
     beforeAll(async() => {
       response = await requestApp.get('/tasks');
     });
@@ -43,11 +42,11 @@ describe("Task endpoints", () => {
     });
   });
 
-  describe("POST /tasks", () => {
+  describe('POST /tasks', () => {
 
   });
 
-  describe("GET /tasks/:id", () => {
+  describe('GET /tasks/:id', () => {
     let task;
 
     beforeAll(async () => {
@@ -85,7 +84,7 @@ describe("Task endpoints", () => {
     });
   });
 
-  describe("GET /tasks/user/:userId", () => {
+  describe('GET /tasks/user/:userId', () => {
 
   });
 });

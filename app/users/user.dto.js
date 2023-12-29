@@ -2,10 +2,10 @@ const { userPath } = require('./users.paths');
 const { userTasksPath } = require('#app/tasks/tasks.paths');
 
 const appendNameWithMe = (user, currentUser) => {
-  if(!currentUser) return user.fullName
+  if(!currentUser) return user.fullName;
 
-  return currentUser.id === user.id ? `${user.fullName} (me)` : user.fullName
-}
+  return currentUser.id === user.id ? `${user.fullName} (me)` : user.fullName;
+};
 const userDTO = (user, currentUser) => {
   return {
     id: user.id,

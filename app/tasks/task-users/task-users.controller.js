@@ -1,10 +1,9 @@
-const User = require("#app/users/user.model");
 const TaskRepository = require('../task.repository');
 const Task = require('../task.model');
 const taskDTO = require('../task.dto');
-const asyncHandler = require('express-async-handler')
+const asyncHandler = require('express-async-handler');
 
-const index = asyncHandler(async (req, res, next) => {
+const index = asyncHandler(async (req, res) => {
   const query = { ...req.query, user_id: req.params.userId };
   let tasks = await TaskRepository.findTasks({ query }, { includes: [Task.User, Task.Item] });
 
@@ -16,4 +15,4 @@ const index = asyncHandler(async (req, res, next) => {
 
 module.exports = {
   index,
-}
+};
