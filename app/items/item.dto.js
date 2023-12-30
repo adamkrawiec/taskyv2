@@ -6,6 +6,15 @@ const getItemSource = (url) => {
   return new URL(url).hostname.replace('www.', '').split('.')[0];
 };
 
+const simpleTaskDTO = (task) => {
+  return {
+    id: task.id,
+    createdAt: task.createdAt,
+    completedAt: task.completedAt,
+    deadlineAt: task.deadlineAt
+  }
+};
+
 const itemDTO = (item, currentUser) => {
   return {
     id: item.id,
@@ -16,6 +25,8 @@ const itemDTO = (item, currentUser) => {
     createdAt: item.createdAt.toDateString(),
 
     author: item.user && userDTO(item.user, currentUser),
+
+    task: item.task && simpleTaskDTO(item.task),
 
     _links: {
       self: `/items/${item.id}`,

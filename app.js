@@ -14,6 +14,7 @@ const { USERS_ROOT_PATH } = require('#app/users/users.paths');
 const { TASKS_ROOT_PATH } = require('#app/tasks/tasks.paths');
 
 const userRouter = require('#app/users/user.router');
+const sessionRouter = require("#app/sessions/session.router")
 const taskRouter = require('#app/tasks/task.router');
 const itemRouter = require('#app/items/item.router');
 const activityRouter = require('#app/activities/activity.router');
@@ -54,6 +55,7 @@ app.use(setCurrentUser);
 app.use('/', homeController);
 app.use(USERS_ROOT_PATH, userRouter);
 app.use(TASKS_ROOT_PATH, taskRouter);
+app.use('/sessions', sessionRouter);
 app.use('/items', itemRouter);
 app.use('/activities', activityRouter);
 
