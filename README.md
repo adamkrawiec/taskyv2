@@ -68,3 +68,6 @@
 - [ ] DTO objects to format dates in a nice way
 - [ ] Notification model
 - [ ] Team model and Team Member
+- [x] add session route - for login action
+- [ ] add session route - for logout action
+- [ ] add registration route

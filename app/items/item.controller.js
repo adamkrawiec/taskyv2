@@ -21,7 +21,12 @@ const create = async(req, res) => {
 const show = async(req, res) => {
   const item = await findItem(req.params.id, { include: [User]});
 
-  res.json({ item: itemDTO(item. req.currentUser) });
+  if (req.query.include_task) {
+    let tasks = await item.getTasks({ where: { userId: req.currentUser.id } });
+    item.task = tasks[0];
+  }
+
+  res.json({ item: itemDTO(item, req.currentUser) });
 };
 
 const update = async(req, res) => {

@@ -10,7 +10,7 @@ const { getSummary } = require('./services/task-summary.service');
 const index = async (req, res) => {
   if(!req.query.perPage) req.query.perPage = 20;
 
-  let tasks = await TaskRepository.findTasks(req);
+  let tasks = await TaskRepository.findTasks(req, { includes: [User, Item]});
   tasks = tasks.map((task) => taskDTO(task, req.currentUser));
 
   const title = req.t('tasks.index.title');
