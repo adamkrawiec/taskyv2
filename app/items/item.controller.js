@@ -1,7 +1,6 @@
 const Item = require('./item.model');
 const itemDTO = require('./item.dto');
 const User = require('#app/users/user.model');
-const Task = require("#app/tasks/task.model");
 
 const index = async (req, res) => {
   const items = await Item.findAll({ include: User });
@@ -23,7 +22,7 @@ const show = async(req, res) => {
   const item = await findItem(req.params.id, { include: [User]});
 
   if (req.query.include_task) {
-    let tasks = await item.getTasks({ where: { userId: req.currentUser.id } })
+    let tasks = await item.getTasks({ where: { userId: req.currentUser.id } });
     item.task = tasks[0];
   }
 

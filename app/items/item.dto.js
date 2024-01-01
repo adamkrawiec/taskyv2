@@ -12,7 +12,7 @@ const simpleTaskDTO = (task) => {
     createdAt: task.createdAt,
     completedAt: task.completedAt,
     deadlineAt: task.deadlineAt
-  }
+  };
 };
 
 const itemDTO = (item, currentUser) => {
