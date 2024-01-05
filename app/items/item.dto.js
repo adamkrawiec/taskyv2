@@ -11,7 +11,11 @@ const simpleTaskDTO = (task) => {
     id: task.id,
     createdAt: task.createdAt,
     completedAt: task.completedAt,
-    deadlineAt: task.deadlineAt
+    deadlineAt: task.deadlineAt,
+    overdue: task.deadlineAt < new Date() && !task.completedAt,
+    _links: {
+      complete: `/tasks/${task.id}/complete`,
+    }
   };
 };
 
