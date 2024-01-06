@@ -5,6 +5,9 @@ const { Op } = require('sequelize');
 
 const index = async (req, res) => {
   conditions = []
+  const perPage = req.query.perPage ? req.query.perPage : 10;
+  const offset = req.query.page ? (req.query.page - 1) * perPage : 0;
+
   if(req.query.title) {
     conditions.push(
       {
@@ -13,7 +16,12 @@ const index = async (req, res) => {
     )
   }
 
-  const items = await Item.findAll({ where: conditions, include: User });
+  const items = await Item.findAll({
+    where: conditions,
+    include: User,
+    limit: perPage,
+    offset,
+  });
 
   const itemData = items.map((item) => itemDTO(item, req.currentUser));
   res.json( { items: itemData });
