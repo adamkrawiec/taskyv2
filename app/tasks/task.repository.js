@@ -36,7 +36,6 @@ const findTasks = async ({ query } = {}, { includes = [], attributes } = {}) => 
 };
 
 const countTasks = async({ query = {}, attributes, group } = {}) => {
-  // console.log(buildConditions(query))
   return await Task.count({
     where: buildConditions(query),
     attributes,

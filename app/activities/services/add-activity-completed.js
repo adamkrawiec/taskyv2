@@ -1,6 +1,6 @@
-const Activity = require('./activity.model');
+const Activity = require('../activity.model');
 const Task = require('#app/tasks/task.model');
-const { completeTask } = require('./services/complete-task.service');
+const { completeTask } = require('#app/tasks/services/complete-task.service');
 const { sequelize }  = require('#db');
 
 const addActivityCompleted = async (activityParams) => {
