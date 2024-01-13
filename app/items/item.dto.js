@@ -26,7 +26,7 @@ const itemDTO = (item, currentUser) => {
     body: item.body,
     url: item.url,
     source: getItemSource(item.url),
-    createdAt: item.createdAt.toDateString(),
+    createdAt: item.createdAt,
 
     author: item.user && userDTO(item.user, currentUser),
 

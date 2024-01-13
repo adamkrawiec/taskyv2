@@ -4,7 +4,7 @@ const User = require('#app/users/user.model');
 const { Op } = require('sequelize');
 
 const index = async (req, res) => {
-  conditions = []
+  const conditions = [];
   const perPage = req.query.perPage ? req.query.perPage : 10;
   const offset = req.query.page ? (req.query.page - 1) * perPage : 0;
 
@@ -13,7 +13,7 @@ const index = async (req, res) => {
       {
         title: { [Op.iLike]: `%${req.query.title}%` }
       }
-    )
+    );
   }
 
   const items = await Item.findAll({

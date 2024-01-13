@@ -1,5 +1,6 @@
 const Activity = require('./activity.model');
 const activityDTO = require('./activity.dto');
+const addActivityCompleted = require('./services/add-activity-completed');
 
 const index = async(req, res) => {
   const activities = await Activity.findAll({
@@ -20,10 +21,7 @@ const create = async(req, res) => {
   };
 
   try {
-    const activity = await Activity.create(activityParams);
-    activity.user = await activity.getUser();
-    activity.item = await activity.getItem();
-
+    const activity = addActivityCompleted(activityParams);
     res.json(activityDTO(activity));
   } catch (err) {
     res.status(422).json({ err });
