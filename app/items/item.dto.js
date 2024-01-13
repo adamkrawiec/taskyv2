@@ -11,7 +11,11 @@ const simpleTaskDTO = (task) => {
     id: task.id,
     createdAt: task.createdAt,
     completedAt: task.completedAt,
-    deadlineAt: task.deadlineAt
+    deadlineAt: task.deadlineAt,
+    overdue: task.deadlineAt < new Date() && !task.completedAt,
+    _links: {
+      complete: `/tasks/${task.id}/complete`,
+    }
   };
 };
 
@@ -22,7 +26,7 @@ const itemDTO = (item, currentUser) => {
     body: item.body,
     url: item.url,
     source: getItemSource(item.url),
-    createdAt: item.createdAt.toDateString(),
+    createdAt: item.createdAt,
 
     author: item.user && userDTO(item.user, currentUser),
 

@@ -1,9 +1,27 @@
 const Item = require('./item.model');
 const itemDTO = require('./item.dto');
 const User = require('#app/users/user.model');
+const { Op } = require('sequelize');
 
 const index = async (req, res) => {
-  const items = await Item.findAll({ include: User });
+  const conditions = [];
+  const perPage = req.query.perPage ? req.query.perPage : 10;
+  const offset = req.query.page ? (req.query.page - 1) * perPage : 0;
+
+  if(req.query.title) {
+    conditions.push(
+      {
+        title: { [Op.iLike]: `%${req.query.title}%` }
+      }
+    );
+  }
+
+  const items = await Item.findAll({
+    where: conditions,
+    include: User,
+    limit: perPage,
+    offset,
+  });
 
   const itemData = items.map((item) => itemDTO(item, req.currentUser));
   res.json( { items: itemData });

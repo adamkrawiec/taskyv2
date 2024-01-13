@@ -2,7 +2,7 @@ const User = require('#app/users/user.model');
 
 const setCurrentUser = async function (req, res, next) {
   console.log('Cookies: ', req.cookies);
-  const user_id = req.cookies.session_id;
+  const user_id = req.cookies.session_id || req.cookies.user_id;
 
   const user = await User.findByPk(user_id);
   req.currentUser = user;
