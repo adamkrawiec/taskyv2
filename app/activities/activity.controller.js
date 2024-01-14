@@ -1,6 +1,7 @@
 const Activity = require('./activity.model');
 const activityDTO = require('./activity.dto');
-const addActivityCompleted = require('./services/add-activity-completed');
+const getFavoriteItem = require('./services/get-favorite-item');
+const getLastCompletedItem = require('./services/get-last-completed-item');
 
 const index = async(req, res) => {
   const activities = await Activity.findAll({
@@ -21,7 +22,10 @@ const create = async(req, res) => {
   };
 
   try {
-    const activity = addActivityCompleted(activityParams);
+    const activity = await Activity.create(activityParams);
+    activity.user = await activity.getUser();
+    activity.item = await activity.getItem();
+
     res.json(activityDTO(activity));
   } catch (err) {
     res.status(422).json({ err });
@@ -39,6 +43,16 @@ const userActivities = async(req, res) => {
   });
 };
 
+const lastCompleted = async(req, res) => {
+  const [item, completedAt] = await getLastCompletedItem(req.params.userId);
+  res.json( { item, completedAt });
+};
+
+const favoriteItem = async(req, res) => {
+  const item = await getFavoriteItem(req.params.userId);
+  res.json( { item });
+};
+
 const serializeActivities = (activities) => activities.map((activity) => activityDTO(activity));
 
 const activitiesQuery = ({ query }) => {
@@ -54,4 +68,6 @@ module.exports = {
   index,
   create,
   userActivities,
+  lastCompleted,
+  favoriteItem,
 };
