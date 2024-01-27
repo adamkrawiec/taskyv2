@@ -7,6 +7,7 @@ const taskDTO = (task, currentUser) => {
     createdAt: task.createdAt,
     completedAt: task.completedAt,
     deadlineAt: task.deadlineAt,
+    overdue: task.deadlineAt < Date.now() && !task.completedAt,
 
     user: task.user && userDTO(task.user, currentUser),
     item: task.item && itemDTO(task.item, currentUser),
