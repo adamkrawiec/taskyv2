@@ -16,15 +16,21 @@ const index = async (req, res) => {
     );
   }
 
-  const items = await Item.findAll({
+  const { count, rows } = await Item.findAndCountAll({
     where: conditions,
     include: User,
     limit: perPage,
     offset,
   });
 
-  const itemData = items.map((item) => itemDTO(item, req.currentUser));
-  res.json( { items: itemData });
+  const items = rows.map((item) => itemDTO(item, req.currentUser));
+
+  const pagination = {
+    totalCount: count,
+    page: req.query.page,
+    pages: Math.ceil(parseFloat(count) / perPage)
+  };
+  res.json( { items, pagination });
 };
 
 const create = async(req, res) => {
