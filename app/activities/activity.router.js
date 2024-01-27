@@ -8,5 +8,7 @@ router.route('/')
   .post(ActivityController.create);
 
 router.route('/user/:userId').get(ActivityController.userActivities);
+router.route('/user/:userId/last_completed').get(ActivityController.lastCompleted);
+router.route('/user/:userId/favorite_item').get(ActivityController.favoriteItem);
 
 module.exports = router;
