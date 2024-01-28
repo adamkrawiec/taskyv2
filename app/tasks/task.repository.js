@@ -35,6 +35,19 @@ const findTasks = async ({ query } = {}, { includes = [], attributes } = {}) => 
   });
 };
 
+const findAndCountAll = async({ query } = {}, { includes = [], attributes } = {}) => {
+  const perPage = query.perPage ? query.perPage : null;
+  const offset = query.page ? (query.page - 1) * perPage : 0;
+
+  return await Task.findAndCountAll({
+    where: buildConditions(query),
+    include: includes,
+    limit: perPage,
+    attributes: attributes,
+    offset,
+  });
+};
+
 const countTasks = async({ query = {}, attributes, group } = {}) => {
   return await Task.count({
     where: buildConditions(query),
@@ -45,4 +58,4 @@ const countTasks = async({ query = {}, attributes, group } = {}) => {
 
 
 
-module.exports = { findTask, findTasks, countTasks };
+module.exports = { findTask, findTasks, countTasks, findAndCountAll };
