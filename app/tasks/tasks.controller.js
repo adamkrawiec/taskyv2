@@ -19,7 +19,7 @@ const index = async (req, res) => {
 
 const open = async(req, res) => {
   if(!req.query.perPage) req.query.perPage = 20;
-  req.query.open = true
+  req.query.open = true;
 
   let tasks = await TaskRepository.findTasks(req, { includes: [Item]});
   res.json({ data: tasks.map((task) => taskDTO(task, req.currentUser)) });

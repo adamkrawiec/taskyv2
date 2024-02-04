@@ -24,8 +24,8 @@
 - [x] marking tasks as complete
 - [x] tests setup & gh action for tests
 - [x] some tests actually written
-- [ ] Activity model
-- [ ] Item model
+- [x] Activity model
+- [x] Item model
 - [x] Item Task relation
 - [x] Item DPO and Controller
 - [x] missing task CRUD interface

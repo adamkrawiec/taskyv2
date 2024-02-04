@@ -16,6 +16,7 @@ router.get(SUMMARY_TASKS_PATH, tasksController.summary);
 router.get('/open', tasksController.open);
 router.get('/user/:userId', taskUsersController.index);
 router.get('/user/:userId/summary', taskUsersController.summary);
+router.get('/user/:userId/open', taskUsersController.openTasks);
 
 
 router.route('/:id').

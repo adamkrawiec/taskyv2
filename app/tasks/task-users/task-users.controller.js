@@ -19,7 +19,13 @@ const summary = async(req, res) => {
   res.json(summary);
 };
 
+const openTasks = async(req, res) => {
+  const query = { open: true , user_id: req.params.userId };
+  const tasks = await TaskRepository.findTasks({ query: { user_id: req.params.userId } });
+  res.json({ data: tasks });
+}
 module.exports = {
   index,
-  summary
+  summary,
+  openTasks
 };
