@@ -17,6 +17,14 @@ const index = async (req, res) => {
   res.json({ title, data: tasks });
 };
 
+const open = async(req, res) => {
+  if(!req.query.perPage) req.query.perPage = 20;
+  req.query.open = true;
+
+  let tasks = await TaskRepository.findTasks(req, { includes: [Item]});
+  res.json({ data: tasks.map((task) => taskDTO(task, req.currentUser)) });
+};
+
 const showById = async (req, res) => {
   try {
     const task = await Task.findByPk(req.params.id, { include: [User, Item] });
@@ -93,5 +101,6 @@ module.exports = {
   complete,
   update,
   summary,
+  open,
   destroy
 };

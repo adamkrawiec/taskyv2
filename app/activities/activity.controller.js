@@ -39,7 +39,7 @@ const userActivities = async(req, res) => {
   });
 
   res.json({
-    activities: serializeActivities(activities)
+    data: serializeActivities(activities)
   });
 };
 

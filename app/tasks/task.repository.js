@@ -7,6 +7,7 @@ const buildConditions = (query) => {
   let conditions = {};
 
   if(query.completed) conditions['completedAt'] = { [Op.not]: null };
+  if(query.open) conditions['completedAt'] = null;
   if(query.user_id) conditions['userId'] = parseInt(query.user_id);
   if(query.item_id) conditions['itemId'] = parseInt(query.item_id);
 

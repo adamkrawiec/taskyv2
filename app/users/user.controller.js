@@ -26,11 +26,14 @@ const findAll = (req, res) => {
 };
 
 const findOne = async (req, res) => {
-  const user = await User.findByPk(req.params.id);
+  try {
+    const user = await User.findByPk(req.params.id);
 
-  if(user) return res.json(fullUserDTO(user, req.currentUser));
-
-  res.status(404).send('not found');
+    if(user) return res.json(fullUserDTO(user, req.currentUser));
+  }
+  catch(e) {
+    res.status(404).send('not found');
+  }
 };
 
 const updateOne = async (req, res) => {
