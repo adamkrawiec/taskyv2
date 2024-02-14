@@ -1,5 +1,5 @@
-const Item = require("#app/items/item.model");
-const Task = require("#app/tasks/task.model");
+const Item = require('#app/items/item.model');
+const Task = require('#app/tasks/task.model');
 const { Op } = require('sequelize');
 
 const VisibleItems = async (user, conditions, perPage, offset) => {
@@ -30,6 +30,6 @@ const VisibleItems = async (user, conditions, perPage, offset) => {
     limit: perPage,
     offset,
   });
-}
+};
 
 module.exports = VisibleItems;
