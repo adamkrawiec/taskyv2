@@ -1,5 +1,6 @@
 const Item = require('./item.model');
 const itemDTO = require('./item.dto');
+const VisibleItems = require('./item.scope');
 const User = require('#app/users/user.model');
 const { Op } = require('sequelize');
 
@@ -16,15 +17,10 @@ const index = async (req, res) => {
     );
   }
 
-  const items = await Item.findAll({
-    where: conditions,
-    include: User,
-    limit: perPage,
-    offset,
-  });
+  const items = await VisibleItems(req.currentUser, conditions, perPage, offset);
 
-  const itemData = items.map((item) => itemDTO(item, req.currentUser));
-  res.json( { items: itemData });
+  const itemsData = items.map((item) => itemDTO(item, req.currentUser));
+  res.json( { items: itemsData });
 };
 
 const create = async(req, res) => {

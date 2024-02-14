@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.post('/', userController.create);
 router.get('/', userController.findAll);
+router.get('/me', userController.me);
 router.get(LEADERBOARD_PATH, leaderboardController.getLeaderboard);
 router.get(USER_PATH, userController.findOne);
 router.put(USER_PATH, userController.updateOne);

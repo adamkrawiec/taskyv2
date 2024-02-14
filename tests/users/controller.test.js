@@ -47,7 +47,8 @@ describe('User Endpoints', () => {
           id: 1,
           fullName: 'Test User',
           email: 'test-user@example.com',
-          'createdAt': '2023-10-20T22:23:32.609Z',
+          type: 'learner',
+          createdAt: '2023-10-20T22:23:32.609Z',
           _links: {
             self: '/users/1'
           }
@@ -71,6 +72,7 @@ describe('User Endpoints', () => {
           id: 1,
           fullName: 'Test User',
           email: 'test-user@example.com',
+          type: 'learner',
           createdAt: '2023-10-20T22:23:32.609Z',
           invitedAt: '2023-10-22T22:23:32.609Z',
           acceptedAt: '2023-10-22T22:23:32.609Z',
