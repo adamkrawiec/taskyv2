@@ -2,7 +2,11 @@ const Item = require('#app/items/item.model');
 const Task = require('#app/tasks/task.model');
 const { Op } = require('sequelize');
 
-const VisibleItems = async (user, conditions, perPage, offset) => {
+const VisibleItems = async (user, query, perPage, offset) => {
+  const conditions = {};
+  if(query.title) {
+    conditions.title = { [Op.iLike]: `%${query.title}%` };
+  }
   if(user.type === 'admin') {
     return await Item.findAll({
       where: conditions,
@@ -17,6 +21,19 @@ const VisibleItems = async (user, conditions, perPage, offset) => {
     raw: true
   });
   
+  console.log(
+    {
+      where: { 
+        [Op.or]: [
+          { visibility: 'all' },
+          { visibility: 'selected', id: {
+            [Op.in]: taskedItemIds.map((task) => task.itemId)
+          } }
+        ],
+        ...conditions,
+      }
+    }
+  );
   return await Item.findAll({
     where: { 
       [Op.or]: [
@@ -32,4 +49,4 @@ const VisibleItems = async (user, conditions, perPage, offset) => {
   });
 };
 
-module.exports = VisibleItems;
+module.exports = { VisibleItems };
