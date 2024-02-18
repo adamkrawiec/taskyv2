@@ -1,6 +1,10 @@
 const User = require('./user.model');
 const { userDTO, fullUserDTO } = require('./user.dto');
 
+const me = async (req, res) => {
+  res.json(fullUserDTO(req.currentUser, req.currentUser));
+};
+
 const create = async (req, res) => {
   const userParams = {
     fullName: req.body.fullName,
@@ -64,5 +68,6 @@ module.exports = {
   findAll,
   findOne,
   updateOne,
-  destroyOne
+  destroyOne,
+  me
 };

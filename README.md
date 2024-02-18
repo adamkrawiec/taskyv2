@@ -71,3 +71,7 @@
 - [x] add session route - for login action
 - [ ] add session route - for logout action
 - [ ] add registration route
+- [x] add user type (learner/admin)
+- [x] tweak scope of visible items for learner/admin
+- [ ] add middleware for protected routes, to check if currentUser is set
+- [ ] add item policies (edit/create/destroy for admins only)

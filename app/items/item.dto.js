@@ -25,6 +25,7 @@ const itemDTO = (item, currentUser) => {
     title: item.title,
     body: item.body,
     url: item.url,
+    visibility: item.visibility,
     source: getItemSource(item.url),
     createdAt: item.createdAt,
 

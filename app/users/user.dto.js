@@ -12,6 +12,7 @@ const userDTO = (user, currentUser) => {
     fullName: appendNameWithMe(user, currentUser),
     email: user.email,
     createdAt: user.createdAt,
+    type: user.type,
 
 
     _links: {
@@ -22,10 +23,7 @@ const userDTO = (user, currentUser) => {
 
 const fullUserDTO = (user, currentUser) => {
   return {
-    id: user.id,
-    fullName: appendNameWithMe(user, currentUser),
-    email: user.email,
-    createdAt: user.createdAt,
+    ...userDTO(user, currentUser),
     invitedAt: user.invitedAt,
     acceptedAt: user.acceptedAt,
 
