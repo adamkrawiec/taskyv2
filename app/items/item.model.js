@@ -27,4 +27,6 @@ const Item = sequelize.define('item', {
 User.hasMany(Item, { foreignKey: 'addedById' });
 Item.belongsTo(User, { foreignKey: 'addedById' });
 
+Item.User = User;
+
 module.exports = Item;

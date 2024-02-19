@@ -64,6 +64,7 @@
   },
   "imports": {
     "#app/*": "./app/*.js",
+    "#middlewares/*": "./middlewares/*.js",
     "#queues/*": "./queues/*.js",
     "#db": "./db.js",
     "#config/*": "./config/*.js",
