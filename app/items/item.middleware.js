@@ -27,7 +27,6 @@ const permitItemParams = (req, res, next) => {
     addedById: req.currentUser.id,
     visibility: req.body.visibility || 'hidden'
   };
-
   req.itemParams = itemParams;
   return next();
 };

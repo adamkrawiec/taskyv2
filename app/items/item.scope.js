@@ -20,20 +20,7 @@ const VisibleItems = async (user, query, perPage, offset) => {
     where: { userId: user.id },
     raw: true
   });
-  
-  console.log(
-    {
-      where: { 
-        [Op.or]: [
-          { visibility: 'all' },
-          { visibility: 'selected', id: {
-            [Op.in]: taskedItemIds.map((task) => task.itemId)
-          } }
-        ],
-        ...conditions,
-      }
-    }
-  );
+
   return await Item.findAll({
     where: { 
       [Op.or]: [

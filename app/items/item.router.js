@@ -20,7 +20,7 @@ const router = express.Router();
 
 router.route('/')
   .get(authorizeItem(allowIndex), addPageParams, ItemController.index)
-  .post(permitItemParams, ItemController.create);
+  .post(authorizeItem(allowIndex), permitItemParams, ItemController.create);
 
 router.use('/web-scrape/', WebScraperRouter);
 

@@ -12,7 +12,7 @@ const allowEdit = (user, item) => {
   return item.userId === user.id;
 };
 
-const allowIndex = (user) => !!user;
+const allowIndex = (user) => user;
 
 module.exports = {
   allowShow,
