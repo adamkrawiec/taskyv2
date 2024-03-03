@@ -3,13 +3,13 @@ const allowShow = (user, item) => {
 
   // add condition for visibility == 'selected' and having task
   return item.visibility === 'all' ||
-    item.userId === user.id;
+    item.addedById === user.id;
 };
 
 const allowEdit = (user, item) => {
   if (user.type === 'admin') return true;
 
-  return item.userId === user.id;
+  return item.addedById === user.id;
 };
 
 const allowIndex = (user) => user;

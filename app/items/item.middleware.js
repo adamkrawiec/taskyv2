@@ -2,24 +2,19 @@ const Item = require('./item.model');
 
 const setItem = async (req, res, next) => {
   if(req.params.id) {
-    req.item = await Item.findByPk(req.params.id, { include: Item.User });
-    return next();
+    let item = await Item.findByPk(req.params.id, { include: Item.User });
+    if(item){
+      req.item = item;
+      return next();
+    }
   }
 
   return res.status(404).json({ message: 'Not found' });
 };
 
-const authorizeItem = (policy) => (req, res, next) => {
-  if (req.item && policy(req.currentUser, req.item)) {
-    return next();
-  }
-
-  if (policy(req.currentUser)) { return next(); }
-
-  return res.status(403).json({ message: 'Forbidden' });
-};
-
 const permitItemParams = (req, res, next) => {
+  if(!req.body.title) return res.status(401).json( { title: "mising" });
+
   const itemParams = {
     title: req.body.title,
     url: req.body.url,
@@ -33,6 +28,5 @@ const permitItemParams = (req, res, next) => {
 
 module.exports = {
   setItem,
-  authorizeItem,
   permitItemParams
 };

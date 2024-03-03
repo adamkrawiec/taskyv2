@@ -3,10 +3,10 @@ const ItemController = require('./item.controller');
 const ItemTasksController = require('./item-tasks/item-tasks.controller');
 const WebScraperRouter = require('./web-scraper/web-scraper.router');
 const { addPageParams } = require('#middlewares/paginate');
+const { authorizeSingle, authorizeCollection } = require("#middlewares/authorize");
 
 const {
   setItem,
-  authorizeItem,
   permitItemParams
 } = require('./item.middleware');
 
@@ -19,17 +19,17 @@ const {
 const router = express.Router();
 
 router.route('/')
-  .get(authorizeItem(allowIndex), addPageParams, ItemController.index)
-  .post(authorizeItem(allowIndex), permitItemParams, ItemController.create);
+  .get(authorizeCollection(allowIndex), addPageParams, ItemController.index)
+  .post(authorizeCollection(allowIndex), permitItemParams, ItemController.create);
 
 router.use('/web-scrape/', WebScraperRouter);
 
 router.route('/:id')
   .all(setItem)
-  .get(authorizeItem(allowShow), ItemController.show)
-  .put(authorizeItem(allowEdit), permitItemParams, ItemController.update);
+  .get(authorizeSingle(allowShow), ItemController.show)
+  .put(authorizeSingle(allowEdit), permitItemParams, ItemController.update);
 
-router.get('/:id/tasks', setItem, authorizeItem(allowShow), ItemTasksController.getTasks);
-router.get('/:id/tasks/summary', setItem, authorizeItem(allowShow), ItemTasksController.getTaskSummary);
+router.get('/:id/tasks', setItem, authorizeSingle(allowShow), ItemTasksController.getTasks);
+router.get('/:id/tasks/summary', setItem, authorizeSingle(allowShow), ItemTasksController.getTaskSummary);
 
 module.exports = router;

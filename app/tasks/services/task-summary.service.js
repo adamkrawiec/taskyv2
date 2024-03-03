@@ -18,10 +18,14 @@ const getSummary = async (req) => {
     return summaryData && summaryData.count;
   };
 
+  let completed = findDataPointCount('completed') || 0;
+  let open = findDataPointCount('open') || 0;
+  let overdue = findDataPointCount('overdue') || 0;
+
   return [
-    { status: 'completed', count: findDataPointCount('completed') || 0 },
-    { status: 'open', count: findDataPointCount('open') || 0 },
-    { status: 'overdue', count: findDataPointCount('overdue') || 0 },
+    { status: 'completed', count: completed },
+    { status: 'open', count: open + overdue },
+    { status: 'overdue', count: overdue },
   ];
 };
 
