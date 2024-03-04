@@ -1,8 +1,10 @@
-const allowShow = (user, item) => {
+const Task = require('#app/tasks/task.model');
+
+const allowShow = async (user, item) => {
   if (user.type === 'admin') return true;
 
-  // add condition for visibility == 'selected' and having task
   return item.visibility === 'all' ||
+    (item.visibility === 'selected' && await Task.findOne({ where: { userId: user.id, itemId: item.id }})) ||
     item.addedById === user.id;
 };
 

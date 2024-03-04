@@ -3,7 +3,7 @@ const ItemController = require('./item.controller');
 const ItemTasksController = require('./item-tasks/item-tasks.controller');
 const WebScraperRouter = require('./web-scraper/web-scraper.router');
 const { addPageParams } = require('#middlewares/paginate');
-const { authorizeSingle, authorizeCollection } = require("#middlewares/authorize");
+const { authorizeSingle, authorizeCollection } = require('#middlewares/authorize');
 
 const {
   setItem,

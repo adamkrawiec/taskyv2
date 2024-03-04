@@ -1,6 +1,11 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('#db');
 const User = require('#app/users/user.model');
+const { 
+  HIDDEN,
+  SELECTED,
+  ALL
+} = require('./constants');
 
 const Item = sequelize.define('item', {
   id: {
@@ -19,7 +24,7 @@ const Item = sequelize.define('item', {
     type: DataTypes.STRING
   },
   visibility: {
-    type: DataTypes.ENUM('hidden', 'selected', 'all'),
+    type: DataTypes.ENUM(HIDDEN, SELECTED, ALL),
     defaultValue: 'hidden'
   },
 });

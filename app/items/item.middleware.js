@@ -1,4 +1,5 @@
 const Item = require('./item.model');
+const ItemSchema = require('./item.schema');
 
 const setItem = async (req, res, next) => {
   if(req.params.id) {
@@ -13,8 +14,6 @@ const setItem = async (req, res, next) => {
 };
 
 const permitItemParams = (req, res, next) => {
-  if(!req.body.title) return res.status(401).json( { title: "mising" });
-
   const itemParams = {
     title: req.body.title,
     url: req.body.url,
@@ -22,6 +21,10 @@ const permitItemParams = (req, res, next) => {
     addedById: req.currentUser.id,
     visibility: req.body.visibility || 'hidden'
   };
+
+  let errors = ItemSchema.validate(itemParams).error;
+  if(errors) return res.status(400).json( { errors: errors.details });
+  
   req.itemParams = itemParams;
   return next();
 };
