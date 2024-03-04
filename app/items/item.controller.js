@@ -1,13 +1,9 @@
 const Item = require('./item.model');
 const itemDTO = require('./item.dto');
 const { VisibleItems } = require('./item.scope');
-const User = require('#app/users/user.model');
 
 const index = async (req, res) => {
-  const perPage = req.query.perPage ? req.query.perPage : 10;
-  const offset = req.query.page ? (req.query.page - 1) * perPage : 0;
-
-  const items = await VisibleItems(req.currentUser, req.query, perPage, offset);
+  const items = await VisibleItems(req.currentUser, req.query, req.perPage, req.offset);
 
   const itemsData = items.map((item) => itemDTO(item, req.currentUser));
   res.json( { items: itemsData });
@@ -15,7 +11,7 @@ const index = async (req, res) => {
 
 const create = async(req, res) => {
   try {
-    const item = await Item.create(itemParams(req));
+    const item = await Item.create(req.itemParams);
     res.json({ item });
   } catch({ errors }) {
     res.status(422).json({ errors });
@@ -23,7 +19,7 @@ const create = async(req, res) => {
 };
 
 const show = async(req, res) => {
-  const item = await findItem(req.params.id, { include: [User]});
+  const item = req.item;
 
   if (req.query.include_task) {
     let tasks = await item.getTasks({ where: { userId: req.currentUser.id } });
@@ -34,27 +30,16 @@ const show = async(req, res) => {
 };
 
 const update = async(req, res) => {
-  const item = await findItem(req.params.id);
+  const item = req.item;
 
   try {
-    item.update(itemParams(req));
+    await item.update(req.itemParams);
     res.json({ item });
   } catch({ errors }) {
     res.status(422).json({ errors });
   }
 };
 
-const findItem = async (id) => await Item.findByPk(id, { include: User });
-
-const itemParams = (req) => {
-  return {
-    title: req.body.title,
-    url: req.body.url,
-    body: req.body.body,
-    addedById: req.currentUser.id,
-    visibility: req.body.visibility || 'hidden'
-  };
-};
 
 
 module.exports = {

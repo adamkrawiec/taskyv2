@@ -26,8 +26,8 @@ describe('ItemTaskSummary.service', () => {
       summary = await getItemTasksSummary(item.id);
     });
 
-    it('returns count of all tasks', async () => {
-      expect(summary.open).toEqual(5);
+    it('returns count of all not completed tasks', async () => {
+      expect(summary.open).toEqual(8);
     });
 
     it('returns count of completed tasks', () => {
@@ -50,8 +50,8 @@ describe('ItemTaskSummary.service', () => {
       summary = await getItemTasksSummary(item.id);
     });
 
-    it('returns count of all tasks for the item', async () => {
-      expect(summary.open).toEqual(5);
+    it('returns count of all not completed tasks for the item', async () => {
+      expect(summary.open).toEqual(8);
     });
 
     it('returns count of completed tasks for item', () => {

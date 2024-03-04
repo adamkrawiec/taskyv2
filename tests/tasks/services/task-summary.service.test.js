@@ -29,7 +29,7 @@ describe('TaskSummary', () => {
 
       expect(summary).toEqual([
         { status: 'completed', count: 1 },
-        { status: 'open', count: 3 },
+        { status: 'open', count: 4 },
         { status: 'overdue', count: 1 }
       ]);
     });
@@ -49,7 +49,7 @@ describe('TaskSummary', () => {
 
       expect(summary).toEqual(
         [ { status: 'completed', count: 1 },
-          { status: 'open', count: 1 },
+          { status: 'open', count: 2 },
           { status: 'overdue', count: 1 } ]
       );
     });
