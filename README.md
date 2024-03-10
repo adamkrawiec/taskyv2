@@ -73,5 +73,5 @@
 - [ ] add registration route
 - [x] add user type (learner/admin)
 - [x] tweak scope of visible items for learner/admin
-- [ ] add middleware for protected routes, to check if currentUser is set
-- [ ] add item policies (edit/create/destroy for admins only)
+- [x] add middleware for protected routes, to check if currentUser is set
+- [x] add item policies (edit/create/destroy for admins only)

@@ -16,9 +16,12 @@ const disconnectDB = async () => {
 };
 
 const requestApp = request(app);
+const requestAsLoggedInUser = (user, reqWithPath) => reqWithPath.set('Cookie', [`session_id=${user.id}`]);
+
 
 module.exports = {
   connectDB,
   disconnectDB,
   requestApp,
+  requestAsLoggedInUser
 };
