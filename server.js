@@ -11,6 +11,6 @@ db.sequelize
     app.listen(PORT, () => {
       console.log(`[server]: Server is running on a port ${PORT}`);
     });
-    swaggerDocs(app)
+    swaggerDocs(app);
   })
   .catch((err) => console.log('Failed to sync db: ' + err.message));

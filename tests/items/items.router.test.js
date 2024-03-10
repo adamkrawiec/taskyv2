@@ -2,6 +2,7 @@ const {
   connectDB,
   disconnectDB,
   requestApp,
+  requestAsLoggedInUser
 } = require('#test_setup');
 const { createItem } = require('#factories/item.factory');
 const { createUser } = require('#factories/user.factory');
@@ -40,7 +41,7 @@ describe('Items endpoints', () => {
 
     describe('when admin is logged in', () => {
       beforeAll(async () => {
-        response = await requestApp.get('/items').set('Cookie', [`session_id=${admin.id}`]);
+        response = await requestAsLoggedInUser(admin, requestApp.get('/items'));
       });
   
       it('response returns status 200', async () => {
@@ -58,7 +59,7 @@ describe('Items endpoints', () => {
 
       describe('when user is logged in', () => {
         beforeAll(async () => {
-          response = await requestApp.get('/items').set('Cookie', [`session_id=${user.id}`]);
+          response = await requestAsLoggedInUser(user, requestApp.get('/items'));
         });
     
         it('response returns visible items', async () => {
@@ -93,7 +94,7 @@ describe('Items endpoints', () => {
     describe('when admin is logged in', () => {
       describe('when payload is invalid', () => {
         beforeAll(async () => {
-          response = await requestApp.post('/items').set('Cookie', [`session_id=${admin.id}`]).send(
+          response = await requestAsLoggedInUser(admin, requestApp.post('/items')).send(
             {}
           );
         });
@@ -105,7 +106,7 @@ describe('Items endpoints', () => {
 
       describe('when payload is valid', () => {
         beforeAll(async () => {
-          response = await requestApp.post('/items').set('Cookie', [`session_id=${admin.id}`]).send(
+          response = await requestAsLoggedInUser(admin, requestApp.post('/items')).send(
             {
               title: 'New Item',
               description: 'New Item Description',
@@ -123,7 +124,7 @@ describe('Items endpoints', () => {
 
     describe('when user is logged in', () => {
       beforeAll(async () => {
-        response = await requestApp.post('/items').set('Cookie', [`session_id=${user.id}`]).send(
+        response = await requestAsLoggedInUser(user, requestApp.post('/items')).send(
           {
             title: 'New Item',
             description: 'New Item Description',
@@ -153,7 +154,7 @@ describe('Items endpoints', () => {
     describe('when admin is logged in ', () => {
       describe('when item visibility is hidden', () => {
         beforeAll(async () => {
-          response = await requestApp.get(`/items/${item.id}`).set('Cookie', [`session_id=${admin.id}`]);
+          response = await requestAsLoggedInUser(admin, requestApp.get(`/items/${item.id}`));
         });
 
         it('response returns status 200', () => {
@@ -164,7 +165,7 @@ describe('Items endpoints', () => {
       describe('when item visibility is selected', () => {
         beforeAll(async () => {
           await item.update({ visibility: 'selected' });
-          response = await requestApp.get(`/items/${item.id}`).set('Cookie', [`session_id=${admin.id}`]);
+          response = await requestAsLoggedInUser(admin, requestApp.get(`/items/${item.id}`));
         });
 
         it('response returns status 200', () => {
@@ -175,7 +176,7 @@ describe('Items endpoints', () => {
 
       describe('when item visibility is all', () => {
         beforeAll(async () => {
-          response = await requestApp.get(`/items/${item2.id}`).set('Cookie', [`session_id=${admin.id}`]);
+          response = await requestAsLoggedInUser(admin, requestApp.get(`/items/${item2.id}`));
         });
 
         it('response returns status 200', () => {
@@ -187,7 +188,7 @@ describe('Items endpoints', () => {
     describe('when user is logged in', () => {
       describe('when item visibility is hidden', () => {
         beforeAll(async () => {
-          response = await requestApp.get(`/items/${item.id}`).set('Cookie', [`session_id=${user.id}`]);
+          response = await requestAsLoggedInUser(user, requestApp.get(`/items/${item.id}`));
         });
 
         it('response returns status 403', () => {
@@ -200,7 +201,7 @@ describe('Items endpoints', () => {
 
         describe('and user has no task assigned', () => {
           beforeAll(async () => {
-            response = await requestApp.get(`/items/${item.id}`).set('Cookie', [`session_id=${user.id}`]);
+            response = await requestAsLoggedInUser(user, requestApp.get(`/items/${item.id}`));
           });
   
           it('response returns status 403', () => {
@@ -211,7 +212,7 @@ describe('Items endpoints', () => {
         describe('and user has task assigned', () => {
           beforeAll(async () => {
             await createTask({ item: item, user: user});
-            response = await requestApp.get(`/items/${item.id}`).set('Cookie', [`session_id=${user.id}`]);
+            response = await requestAsLoggedInUser(user, requestApp.get(`/items/${item.id}`));
           });
   
           it('response returns status 200', () => {
@@ -222,7 +223,7 @@ describe('Items endpoints', () => {
         describe('and item was added by user', () => {
           beforeAll(async () => {
             await item.update({ addedById: user.id });
-            response = await requestApp.get(`/items/${item.id}`).set('Cookie', [`session_id=${user.id}`]);
+            response = await requestAsLoggedInUser(user, requestApp.get(`/items/${item.id}`));
           });
   
           it('response returns status 200', () => {
@@ -233,7 +234,7 @@ describe('Items endpoints', () => {
 
       describe('when item visibility is all', () => {
         beforeAll(async () => {
-          response = await requestApp.get(`/items/${item2.id}`).set('Cookie', [`session_id=${user.id}`]);
+          response = await requestAsLoggedInUser(user, requestApp.get(`/items/${item2.id}`));
         });
 
         it('response returns status 200', () => {

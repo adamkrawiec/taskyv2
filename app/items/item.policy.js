@@ -1,10 +1,12 @@
-const Task = require('#app/tasks/task.model');
+const { find }  = require('lodash');
 
 const allowShow = async (user, item) => {
   if (user.type === 'admin') return true;
 
+  let task = find(item.tasks, { userId: user.id });
+
   return item.visibility === 'all' ||
-    (item.visibility === 'selected' && await Task.findOne({ where: { userId: user.id, itemId: item.id }})) ||
+    (item.visibility === 'selected' && task) ||
     item.addedById === user.id;
 };
 

@@ -1,9 +1,12 @@
-const Item = require('./item.model');
+const { findItemByIdIncludeTaskForUser } = require('./item.repository');
 const ItemSchema = require('./item.schema');
+const { isNil } = require('lodash');
 
 const setItem = async (req, res, next) => {
+  if(isNil(req.currentUser)) return res.status(404).json({ message: 'Not found' });
+
   if(req.params.id) {
-    let item = await Item.findByPk(req.params.id, { include: Item.User });
+    const item = await findItemByIdIncludeTaskForUser(req.params.id, req.currentUser);
     if(item){
       req.item = item;
       return next();
