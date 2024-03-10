@@ -6,6 +6,9 @@
  *     Item:
  *       type: object
  *       properties:
+ *         id:
+ *           type: integer
+ *           description: The auto-generated id of the item.
  *         title:
  *           type: string
  *           description: The item's title.
@@ -18,6 +21,14 @@
  *         visibility:
  *           type: string,
  *           example: all
+ *           enum: [hidden, selected, all]
+ *         createdAt:
+ *           type: string
+ *           format: date-time
+ *           description: The date the item was created.
+ *           example: 2021-09-01T00:00:00.000Z
+ *         author:
+ *           $ref: '#/components/schemas/User'
  */
 
 /** GET Methods */
@@ -26,7 +37,7 @@
  * '/items':
  *  get:
  *     tags:
- *     - Item Controller
+ *     - Items Controller
  *     summary: Get a list of items
  *     parameters:
  *      - name: title
@@ -52,6 +63,8 @@
  *        description: Server Error
  *  post:
  *   summary: Create a new item
+ *   tags:
+ *     - Items Controller
  *   requestBody:
  *      required: true
  *      content:
@@ -73,6 +86,22 @@
  *              visibility:
  *                type: string
  *                enum: [hidden, selected, all]
+ * '/items/{id}':
+ *  get:
+ *    tags:
+ *     - Items Controller 
+ *    summary: Get a single item
+ *    parameters:
+ *      - name: include_tasks
+ *        in: query
+ *        description: Allows to include tasks in the response
+ *    responses:
+ *      200:
+ *        description: Fetched Successfully
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/components/schemas/Item'
  */
 const express = require('express');
 const ItemController = require('./item.controller');
